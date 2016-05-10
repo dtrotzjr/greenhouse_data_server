@@ -13,16 +13,15 @@ A Raspberry Pi is recommended but not required for this project. You can use any
 $> sudo apt-get install libsqlite3-dev
 ```
 
-OPTIONAL: If you want to view the sqlite database from the commandline be install the sqlite3 package
-```
-$> sudo apt-get install sqlite3
-```
-
 `libjsoncpp-dev` is required to parse the data stream from OpenWeatherMap.org's API calls. To install on your Raspberry pi run the command:
 ```
 $> sudo apt-get install libjsoncpp-dev
 ```
 
+OPTIONAL: If you want to view the sqlite database from the commandline be install the sqlite3 package
+```
+$> sudo apt-get install sqlite3
+```
 
 ## Running
 
