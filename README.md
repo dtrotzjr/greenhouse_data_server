@@ -31,10 +31,10 @@ $> sudo apt-get install libjsoncpp-dev
 To run the app you will need to configure it for your setup. The following is a sample config.json
 ```
 {
-        "open_weather_map_apikey"=""
-        "latitude"="37.3230"
-        "longitude"="-122.0322"
-        "sqlite3_file"="/home/pi/data/weather_data_pi.sqlite"
+        "open_weather_map_apikey":"<YOUR_KEY_HERE>>",
+        "latitude":"37.3230",
+        "longitude":"-122.0322",
+        "sqlite3_file":"/home/pi/data/weather_data_pi.sqlite"
 }
 ```
 
