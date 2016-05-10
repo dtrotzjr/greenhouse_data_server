@@ -14,12 +14,12 @@ APWeatherData::~APWeatherData() {
     sqlite3_close(_db);
 }
 
-bool APWeatherData::init(std::string* dbPath) {
+bool APWeatherData::init(std::string dbPath) {
     bool failed = false;
     char *zErrMsg = 0;
     int rc;
 
-    rc = sqlite3_open(dbPath->c_str(), &_db);
+    rc = sqlite3_open(dbPath.c_str(), &_db);
     if(rc != SQLITE_OK) {
         fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(_db));
         sqlite3_close(_db);

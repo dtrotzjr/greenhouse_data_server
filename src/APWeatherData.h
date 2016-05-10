@@ -12,7 +12,7 @@ protected:
 public:
     APWeatherData();
     virtual ~APWeatherData();
-    bool init(std::string* dbPath);
+    bool init(std::string dbPath);
 };
 
 
