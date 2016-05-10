@@ -1,6 +1,11 @@
-<<<<<<< HEAD
+# Project Specific
+CMakeCache.txt
+CMakeFiles/
+*.cmake
+greenhouse_data_server
+*.sqlite
 config.json
-=======
+
 # Object files
 *.o
 *.ko
@@ -33,4 +38,3 @@ config.json
 
 # Debug files
 *.dSYM/
->>>>>>> 9bc3665333b839004d000193ebb93db08f02b0f8
