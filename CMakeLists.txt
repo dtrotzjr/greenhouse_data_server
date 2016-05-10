@@ -11,3 +11,4 @@ add_executable(greenhouse_data_server ${SOURCE_FILES})
 
 link_directories(/use/local/lib)
 target_link_libraries(greenhouse_data_server sqlite3)
+target_link_libraries(greenhouse_data_server jsoncpp)
