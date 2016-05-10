@@ -10,12 +10,12 @@ int main(int argc, char* argv[])
 {
     if (argc == 2) {
         Json::Value root;
-        ifstream jsonFileStream;
-        infile.open(argv[1]);
+        std::ifstream jsonFileStream;
+        jsonFileStream.open(argv[1]);
         jsonFileStream >> root;
 
         APWeatherData* wd = new APWeatherData();
-        wd->init(root["sqlite3_file"]);
+        wd->init(root["sqlite3_file"].asString());
         return 0;
     }
     std::cout << "Usage " + std::string(argv[1]) + " <path to config.json>" << std::endl;
