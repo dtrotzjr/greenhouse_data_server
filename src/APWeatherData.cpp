@@ -40,7 +40,13 @@ bool APWeatherData::init(std::string configPath) {
             rc = sqlite3_exec(_db, "PRAGMA encoding = \"UTF-8\";", NULL, 0, &zErrMsg);
 
             // Create the needed tables
-            rc = sqlite3_exec(_db, "CREATE TABLE IF NOT EXISTS owm_cities (id INT PRIMARY KEY, name TEXT DEFAULT \"Unnamed Location\") ;", NULL, 0, &zErrMsg);
+            rc = sqlite3_exec(_db, "CREATE TABLE IF NOT EXISTS owm_cities (id INT PRIMARY KEY, name TEXT DEFAULT \"Unnamed Location\");", NULL, 0, &zErrMsg);
+            if(rc != SQLITE_OK) {
+                fprintf(stderr, "SQL error: %s\n", zErrMsg);
+                sqlite3_free(zErrMsg);
+            }
+
+            rc = sqlite3_exec(_db, "CREATE TABLE IF NOT EXISTS owm_weather (id INT PRIMARY KEY, main TEXT, description TEXT, icon TEXT);", NULL, 0, &zErrMsg);
             if(rc != SQLITE_OK) {
                 fprintf(stderr, "SQL error: %s\n", zErrMsg);
                 sqlite3_free(zErrMsg);
