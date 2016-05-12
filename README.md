@@ -13,16 +13,15 @@ A Raspberry Pi is recommended but not required for this project. You can use any
 $> sudo apt-get install libsqlite3-dev
 ```
 
-If you want to view the sqlite database from the commandline be install the sqlite3 package
-```
-$> sudo apt-get install sqlite3
-```
-
 `libjsoncpp-dev` is required to parse the data stream from OpenWeatherMap.org's API calls. To install on your Raspberry pi run the command:
 ```
 $> sudo apt-get install libjsoncpp-dev
 ```
 
+OPTIONAL: If you want to view the sqlite database from the commandline be install the sqlite3 package
+```
+$> sudo apt-get install sqlite3
+```
 
 ## Running
 
@@ -31,7 +30,7 @@ $> sudo apt-get install libjsoncpp-dev
 To run the app you will need to configure it for your setup. The following is a sample config.json
 ```
 {
-        "open_weather_map_apikey":"<YOUR_KEY_HERE>>",
+        "open_weather_map_apikey":"<YOUR_KEY_HERE>",
         "latitude":"37.3230",
         "longitude":"-122.0322",
         "sqlite3_file":"/home/pi/data/weather_data_pi.sqlite"
@@ -47,8 +46,7 @@ The `latitude` and `longitude` values for the location you wish to retrieve curr
 
 ### Run the app
 
-After building simply run
+After building simply run. Be sure to provide the path to your `config.json` file
 ```
 $> ./greenhouse_data_server config.json
 ```
-Providing the path to your `config.json` file
