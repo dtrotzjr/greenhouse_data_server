@@ -40,13 +40,20 @@ bool APWeatherData::init(std::string configPath) {
             rc = sqlite3_exec(_db, "PRAGMA encoding = \"UTF-8\";", NULL, 0, &zErrMsg);
 
             // Create the needed tables
-            rc = sqlite3_exec(_db, "CREATE TABLE IF NOT EXISTS owm_cities (id INT PRIMARY KEY, name TEXT DEFAULT \"Unnamed Location\");", NULL, 0, &zErrMsg);
+            rc = sqlite3_exec(_db, "CREATE TABLE IF NOT EXISTS owm_city (id INT PRIMARY KEY, name TEXT DEFAULT \"Unnamed Location\");", NULL, 0, &zErrMsg);
             if(rc != SQLITE_OK) {
                 fprintf(stderr, "SQL error: %s\n", zErrMsg);
                 sqlite3_free(zErrMsg);
             }
 
             rc = sqlite3_exec(_db, "CREATE TABLE IF NOT EXISTS owm_weather (id INT PRIMARY KEY, main TEXT, description TEXT, icon TEXT);", NULL, 0, &zErrMsg);
+            if(rc != SQLITE_OK) {
+                fprintf(stderr, "SQL error: %s\n", zErrMsg);
+                sqlite3_free(zErrMsg);
+            }
+
+
+            rc = sqlite3_exec(_db, "CREATE TABLE IF NOT EXISTS owm_forecast_entry (id INT PRIMARY KEY, dt INT, main_temp_k REAL, main_temp_min_k REAL, main_temp_max_k REAL, main_pressure REAL, main_sea_level REAL, main_ground_level REAL, main_humidity REAL, temp_kf REAL, clouds_percent REAL, wind_speed_mps REAL, wind_deg REAL, rain_vol_last_3h REAL, snow_last_3h REAL, dt_txt TEXT, owm_weather_id INT REFERENCES owm_weather(id) ON DELETE CASCADE, owm_city_id INT REFERENCES owm_city(id) ON DELETE CASCADE);", NULL, 0, &zErrMsg);
             if(rc != SQLITE_OK) {
                 fprintf(stderr, "SQL error: %s\n", zErrMsg);
                 sqlite3_free(zErrMsg);
