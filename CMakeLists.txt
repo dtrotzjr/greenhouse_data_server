@@ -10,5 +10,6 @@ set(SOURCE_FILES
 add_executable(greenhouse_data_server ${SOURCE_FILES})
 
 link_directories(/use/local/lib)
+target_include_directories(greenhouse_data_server PUBLIC /usr/include/jsoncpp/)
 target_link_libraries(greenhouse_data_server sqlite3)
 target_link_libraries(greenhouse_data_server jsoncpp)
