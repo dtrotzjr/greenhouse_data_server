@@ -7,14 +7,30 @@
 #ifndef GREENHOUSE_DATA_SERVER_APWEATHERDATA_H
 #define GREENHOUSE_DATA_SERVER_APWEATHERDATA_H
 
+
+typedef struct MemoryStruct {
+    char *memory;
+    size_t size;
+} MemoryStructType;
+
 class APWeatherData {
 protected:
     sqlite3 *_db;
     Json::Value _config;
+    MemoryStructType _curlResponseChunk;
 public:
     APWeatherData();
     virtual ~APWeatherData();
     bool init(std::string configPath);
+
+    char* Get5DayForecast();
+    void ParseAndStore5DayForecastResponse(char* response);
+
+protected:
+    bool _beginTransation();
+    bool _endTransation();
+    bool _doSQL(const char* sql);
+
 };
 
 
