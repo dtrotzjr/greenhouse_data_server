@@ -2,25 +2,25 @@
 // Created by David Trotz on 5/9/16.
 //
 
-#include "APWeatherData.h"
+#include "APWeatherDataManager.h"
 #include <fstream>
 #include <json/json.h>
 #include <curl/curl.h>
 #include <sstream>
 #include <string.h>
 
-APWeatherData::APWeatherData() {
+APWeatherDataManager::APWeatherDataManager() {
     _db = NULL;
     _curlResponseChunk.memory = NULL;
     _curlResponseChunk.size = 0;
 }
 
-APWeatherData::~APWeatherData() {
+APWeatherDataManager::~APWeatherDataManager() {
     sqlite3_close(_db);
     free(_curlResponseChunk.memory);
 }
 
-bool APWeatherData::init(std::string configPath) {
+bool APWeatherDataManager::init(std::string configPath) {
     bool success = false;
     if (configPath.length() > 0) {
         if (_db != NULL)
@@ -100,7 +100,7 @@ WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp)
     return realsize;
 }
 
-char* APWeatherData::Get5DayForecast() {
+char* APWeatherDataManager::Get5DayForecast() {
     CURL *curl;
     CURLcode res;
     if(_curlResponseChunk.memory != NULL) {
@@ -130,7 +130,7 @@ char* APWeatherData::Get5DayForecast() {
     return _curlResponseChunk.memory;
 }
 
-void APWeatherData::ParseAndStore5DayForecastResponse(char* response) {
+void APWeatherDataManager::ParseAndStore5DayForecastResponse(char* response) {
     std::stringstream s;
     s << response;
     Json::Value json;
@@ -146,15 +146,15 @@ void APWeatherData::ParseAndStore5DayForecastResponse(char* response) {
     _endTransation();
 }
 
-bool APWeatherData::_beginTransation() {
+bool APWeatherDataManager::_beginTransation() {
     return _doSQL("BEGIN TRANSACTION");
 }
 
-bool APWeatherData::_endTransation() {
+bool APWeatherDataManager::_endTransation() {
     return _doSQL("COMMIT");
 }
 
-bool APWeatherData::_doSQL(const char* sql){
+bool APWeatherDataManager::_doSQL(const char* sql){
     sqlite3_stmt* stmt;
     sqlite3_prepare_v2(_db, sql, -1, &stmt, NULL);
     int rc = sqlite3_step(stmt);                                                                    /* 3 */

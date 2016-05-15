@@ -1,5 +1,5 @@
 #include <iostream>
-#include "APWeatherData.h"
+#include "APWeatherDataManager.h"
 
 #define CURRENT_WEATHER_URL "http://api.openweathermap.org/data/2.5/weather"
 #define FIVE_DAY_FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast"
@@ -7,7 +7,7 @@
 int main(int argc, char* argv[]) 
 {
     if (argc == 2) {
-        APWeatherData* wd = new APWeatherData();
+        APWeatherDataManager* wd = new APWeatherDataManager();
         wd->init(argv[1]);
         char* response = wd->Get5DayForecast();
         wd->ParseAndStore5DayForecastResponse(response);

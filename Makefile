@@ -115,29 +115,29 @@ greenhouse_data_server/fast:
 	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/build
 .PHONY : greenhouse_data_server/fast
 
-src/APWeatherData.o: src/APWeatherData.cpp.o
-.PHONY : src/APWeatherData.o
+src/APWeatherDataManager.o: src/APWeatherDataManager.cpp.o
+.PHONY : src/APWeatherDataManager.o
 
 # target to build an object file
-src/APWeatherData.cpp.o:
-	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/APWeatherData.cpp.o
-.PHONY : src/APWeatherData.cpp.o
+src/APWeatherDataManager.cpp.o:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/APWeatherDataManager.cpp.o
+.PHONY : src/APWeatherDataManager.cpp.o
 
-src/APWeatherData.i: src/APWeatherData.cpp.i
-.PHONY : src/APWeatherData.i
+src/APWeatherDataManager.i: src/APWeatherDataManager.cpp.i
+.PHONY : src/APWeatherDataManager.i
 
 # target to preprocess a source file
-src/APWeatherData.cpp.i:
-	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/APWeatherData.cpp.i
-.PHONY : src/APWeatherData.cpp.i
+src/APWeatherDataManager.cpp.i:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/APWeatherDataManager.cpp.i
+.PHONY : src/APWeatherDataManager.cpp.i
 
-src/APWeatherData.s: src/APWeatherData.cpp.s
-.PHONY : src/APWeatherData.s
+src/APWeatherDataManager.s: src/APWeatherDataManager.cpp.s
+.PHONY : src/APWeatherDataManager.s
 
 # target to generate assembly for a file
-src/APWeatherData.cpp.s:
-	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/APWeatherData.cpp.s
-.PHONY : src/APWeatherData.cpp.s
+src/APWeatherDataManager.cpp.s:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/APWeatherDataManager.cpp.s
+.PHONY : src/APWeatherDataManager.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -172,9 +172,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... greenhouse_data_server"
 	@echo "... rebuild_cache"
-	@echo "... src/APWeatherData.o"
-	@echo "... src/APWeatherData.i"
-	@echo "... src/APWeatherData.s"
+	@echo "... src/APWeatherDataManager.o"
+	@echo "... src/APWeatherDataManager.i"
+	@echo "... src/APWeatherDataManager.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

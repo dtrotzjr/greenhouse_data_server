@@ -30,10 +30,12 @@ $> sudo apt-get install sqlite3
 To run the app you will need to configure it for your setup. The following is a sample config.json
 ```
 {
-        "open_weather_map_apikey":"<YOUR_KEY_HERE>",
-        "latitude":"37.3230",
-        "longitude":"-122.0322",
-        "sqlite3_file":"/home/pi/data/weather_data_pi.sqlite"
+    "open_weather_map_apikey":"<YOUR_OPEN_WEATHERMAP_APIKEY>",
+    "wunderground_apikey":"<YOUR_WUNDERGROUND_APIKEY>",
+    "forcast_io_api_key":"<YOUR_FORECAST_IO_APIKEY>",
+    "latitude":"47.7632",
+    "longitude":"-117.4192",
+    "sqlite3_file":"/home/pi/local/greenhouse_server/data/weather_data_pi.sqlite"
 }
 ```
 
@@ -48,5 +50,5 @@ The `latitude` and `longitude` values for the location you wish to retrieve curr
 
 After building simply run. Be sure to provide the path to your `config.json` file
 ```
-$> ./greenhouse_data_server config.json
+$> ./greenhouse_data_server /home/pi/local/greenhouse_server/config/config.json
 ```

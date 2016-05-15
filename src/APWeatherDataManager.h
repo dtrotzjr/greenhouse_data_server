@@ -13,14 +13,14 @@ typedef struct MemoryStruct {
     size_t size;
 } MemoryStructType;
 
-class APWeatherData {
+class APWeatherDataManager {
 protected:
     sqlite3 *_db;
     Json::Value _config;
     MemoryStructType _curlResponseChunk;
 public:
-    APWeatherData();
-    virtual ~APWeatherData();
+    APWeatherDataManager();
+    virtual ~APWeatherDataManager();
     bool init(std::string configPath);
 
     char* Get5DayForecast();
