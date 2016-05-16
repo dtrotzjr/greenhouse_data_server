@@ -4,33 +4,23 @@
 #include <string>
 #include <sqlite3.h>
 #include <json/json.h>
+#include <APWeatherSource.h>
+#include <vector>
+
 #ifndef GREENHOUSE_DATA_SERVER_APWEATHERDATA_H
 #define GREENHOUSE_DATA_SERVER_APWEATHERDATA_H
-
-
-typedef struct MemoryStruct {
-    char *memory;
-    size_t size;
-} MemoryStructType;
+class APSimpleSQL;
 
 class APWeatherDataManager {
-protected:
-    sqlite3 *_db;
-    Json::Value _config;
-    MemoryStructType _curlResponseChunk;
 public:
-    APWeatherDataManager();
+    APWeatherDataManager(std::string configPath);
     virtual ~APWeatherDataManager();
-    bool init(std::string configPath);
 
-    char* Get5DayForecast();
-    void ParseAndStore5DayForecastResponse(char* response);
-
+    void GetLatestWeatherData();
 protected:
-    bool _beginTransation();
-    bool _endTransation();
-    bool _doSQL(const char* sql);
-
+    APSimpleSQL *_sqlDb;
+    Json::Value _config;
+    std::vector<APWeatherSource*> *_sources;
 };
 
 

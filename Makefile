@@ -163,6 +163,174 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/util/APException.o: src/util/APException.cpp.o
+.PHONY : src/util/APException.o
+
+# target to build an object file
+src/util/APException.cpp.o:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/util/APException.cpp.o
+.PHONY : src/util/APException.cpp.o
+
+src/util/APException.i: src/util/APException.cpp.i
+.PHONY : src/util/APException.i
+
+# target to preprocess a source file
+src/util/APException.cpp.i:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/util/APException.cpp.i
+.PHONY : src/util/APException.cpp.i
+
+src/util/APException.s: src/util/APException.cpp.s
+.PHONY : src/util/APException.s
+
+# target to generate assembly for a file
+src/util/APException.cpp.s:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/util/APException.cpp.s
+.PHONY : src/util/APException.cpp.s
+
+src/util/APSQLException.o: src/util/APSQLException.cpp.o
+.PHONY : src/util/APSQLException.o
+
+# target to build an object file
+src/util/APSQLException.cpp.o:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/util/APSQLException.cpp.o
+.PHONY : src/util/APSQLException.cpp.o
+
+src/util/APSQLException.i: src/util/APSQLException.cpp.i
+.PHONY : src/util/APSQLException.i
+
+# target to preprocess a source file
+src/util/APSQLException.cpp.i:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/util/APSQLException.cpp.i
+.PHONY : src/util/APSQLException.cpp.i
+
+src/util/APSQLException.s: src/util/APSQLException.cpp.s
+.PHONY : src/util/APSQLException.s
+
+# target to generate assembly for a file
+src/util/APSQLException.cpp.s:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/util/APSQLException.cpp.s
+.PHONY : src/util/APSQLException.cpp.s
+
+src/util/APSimpleJSONQuery.o: src/util/APSimpleJSONQuery.cpp.o
+.PHONY : src/util/APSimpleJSONQuery.o
+
+# target to build an object file
+src/util/APSimpleJSONQuery.cpp.o:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/util/APSimpleJSONQuery.cpp.o
+.PHONY : src/util/APSimpleJSONQuery.cpp.o
+
+src/util/APSimpleJSONQuery.i: src/util/APSimpleJSONQuery.cpp.i
+.PHONY : src/util/APSimpleJSONQuery.i
+
+# target to preprocess a source file
+src/util/APSimpleJSONQuery.cpp.i:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/util/APSimpleJSONQuery.cpp.i
+.PHONY : src/util/APSimpleJSONQuery.cpp.i
+
+src/util/APSimpleJSONQuery.s: src/util/APSimpleJSONQuery.cpp.s
+.PHONY : src/util/APSimpleJSONQuery.s
+
+# target to generate assembly for a file
+src/util/APSimpleJSONQuery.cpp.s:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/util/APSimpleJSONQuery.cpp.s
+.PHONY : src/util/APSimpleJSONQuery.cpp.s
+
+src/util/APSimpleSQL.o: src/util/APSimpleSQL.cpp.o
+.PHONY : src/util/APSimpleSQL.o
+
+# target to build an object file
+src/util/APSimpleSQL.cpp.o:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/util/APSimpleSQL.cpp.o
+.PHONY : src/util/APSimpleSQL.cpp.o
+
+src/util/APSimpleSQL.i: src/util/APSimpleSQL.cpp.i
+.PHONY : src/util/APSimpleSQL.i
+
+# target to preprocess a source file
+src/util/APSimpleSQL.cpp.i:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/util/APSimpleSQL.cpp.i
+.PHONY : src/util/APSimpleSQL.cpp.i
+
+src/util/APSimpleSQL.s: src/util/APSimpleSQL.cpp.s
+.PHONY : src/util/APSimpleSQL.s
+
+# target to generate assembly for a file
+src/util/APSimpleSQL.cpp.s:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/util/APSimpleSQL.cpp.s
+.PHONY : src/util/APSimpleSQL.cpp.s
+
+src/weather_sources/APDarkSkyForcastIO.o: src/weather_sources/APDarkSkyForcastIO.cpp.o
+.PHONY : src/weather_sources/APDarkSkyForcastIO.o
+
+# target to build an object file
+src/weather_sources/APDarkSkyForcastIO.cpp.o:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/weather_sources/APDarkSkyForcastIO.cpp.o
+.PHONY : src/weather_sources/APDarkSkyForcastIO.cpp.o
+
+src/weather_sources/APDarkSkyForcastIO.i: src/weather_sources/APDarkSkyForcastIO.cpp.i
+.PHONY : src/weather_sources/APDarkSkyForcastIO.i
+
+# target to preprocess a source file
+src/weather_sources/APDarkSkyForcastIO.cpp.i:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/weather_sources/APDarkSkyForcastIO.cpp.i
+.PHONY : src/weather_sources/APDarkSkyForcastIO.cpp.i
+
+src/weather_sources/APDarkSkyForcastIO.s: src/weather_sources/APDarkSkyForcastIO.cpp.s
+.PHONY : src/weather_sources/APDarkSkyForcastIO.s
+
+# target to generate assembly for a file
+src/weather_sources/APDarkSkyForcastIO.cpp.s:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/weather_sources/APDarkSkyForcastIO.cpp.s
+.PHONY : src/weather_sources/APDarkSkyForcastIO.cpp.s
+
+src/weather_sources/APOpenWeatherMap.o: src/weather_sources/APOpenWeatherMap.cpp.o
+.PHONY : src/weather_sources/APOpenWeatherMap.o
+
+# target to build an object file
+src/weather_sources/APOpenWeatherMap.cpp.o:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/weather_sources/APOpenWeatherMap.cpp.o
+.PHONY : src/weather_sources/APOpenWeatherMap.cpp.o
+
+src/weather_sources/APOpenWeatherMap.i: src/weather_sources/APOpenWeatherMap.cpp.i
+.PHONY : src/weather_sources/APOpenWeatherMap.i
+
+# target to preprocess a source file
+src/weather_sources/APOpenWeatherMap.cpp.i:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/weather_sources/APOpenWeatherMap.cpp.i
+.PHONY : src/weather_sources/APOpenWeatherMap.cpp.i
+
+src/weather_sources/APOpenWeatherMap.s: src/weather_sources/APOpenWeatherMap.cpp.s
+.PHONY : src/weather_sources/APOpenWeatherMap.s
+
+# target to generate assembly for a file
+src/weather_sources/APOpenWeatherMap.cpp.s:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/weather_sources/APOpenWeatherMap.cpp.s
+.PHONY : src/weather_sources/APOpenWeatherMap.cpp.s
+
+src/weather_sources/APWeatherSource.o: src/weather_sources/APWeatherSource.cpp.o
+.PHONY : src/weather_sources/APWeatherSource.o
+
+# target to build an object file
+src/weather_sources/APWeatherSource.cpp.o:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/weather_sources/APWeatherSource.cpp.o
+.PHONY : src/weather_sources/APWeatherSource.cpp.o
+
+src/weather_sources/APWeatherSource.i: src/weather_sources/APWeatherSource.cpp.i
+.PHONY : src/weather_sources/APWeatherSource.i
+
+# target to preprocess a source file
+src/weather_sources/APWeatherSource.cpp.i:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/weather_sources/APWeatherSource.cpp.i
+.PHONY : src/weather_sources/APWeatherSource.cpp.i
+
+src/weather_sources/APWeatherSource.s: src/weather_sources/APWeatherSource.cpp.s
+.PHONY : src/weather_sources/APWeatherSource.s
+
+# target to generate assembly for a file
+src/weather_sources/APWeatherSource.cpp.s:
+	$(MAKE) -f CMakeFiles/greenhouse_data_server.dir/build.make CMakeFiles/greenhouse_data_server.dir/src/weather_sources/APWeatherSource.cpp.s
+.PHONY : src/weather_sources/APWeatherSource.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -178,6 +346,27 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/util/APException.o"
+	@echo "... src/util/APException.i"
+	@echo "... src/util/APException.s"
+	@echo "... src/util/APSQLException.o"
+	@echo "... src/util/APSQLException.i"
+	@echo "... src/util/APSQLException.s"
+	@echo "... src/util/APSimpleJSONQuery.o"
+	@echo "... src/util/APSimpleJSONQuery.i"
+	@echo "... src/util/APSimpleJSONQuery.s"
+	@echo "... src/util/APSimpleSQL.o"
+	@echo "... src/util/APSimpleSQL.i"
+	@echo "... src/util/APSimpleSQL.s"
+	@echo "... src/weather_sources/APDarkSkyForcastIO.o"
+	@echo "... src/weather_sources/APDarkSkyForcastIO.i"
+	@echo "... src/weather_sources/APDarkSkyForcastIO.s"
+	@echo "... src/weather_sources/APOpenWeatherMap.o"
+	@echo "... src/weather_sources/APOpenWeatherMap.i"
+	@echo "... src/weather_sources/APOpenWeatherMap.s"
+	@echo "... src/weather_sources/APWeatherSource.o"
+	@echo "... src/weather_sources/APWeatherSource.i"
+	@echo "... src/weather_sources/APWeatherSource.s"
 .PHONY : help
 
 

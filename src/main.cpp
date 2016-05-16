@@ -7,10 +7,9 @@
 int main(int argc, char* argv[]) 
 {
     if (argc == 2) {
-        APWeatherDataManager* wd = new APWeatherDataManager();
-        wd->init(argv[1]);
-        char* response = wd->Get5DayForecast();
-        wd->ParseAndStore5DayForecastResponse(response);
+        APWeatherDataManager* wm = new APWeatherDataManager(argv[1]);
+        wm->GetLatestWeatherData();
+
         return 0;
     }
     std::cout << "Usage " + std::string(argv[1]) + " <path to config.json>" << std::endl;
