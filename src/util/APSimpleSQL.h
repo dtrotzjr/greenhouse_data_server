@@ -18,6 +18,7 @@ public:
 
     void DoSQL(const char* sql);
 
+    bool RowExists(const char* table_name, int64_t rowid);
 private:
     sqlite3 *_db;
 

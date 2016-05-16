@@ -69,3 +69,23 @@ void APSimpleSQL::DoSQL(const char* sql) {
         throw APSQLException(std::string(buff));
     }
 }
+
+bool APSimpleSQL::RowExists(const char* table_name, int64_t rowid) {
+    bool exists = false;
+    sqlite3_stmt* stmt;
+    char* buff[4096];
+    snprintf(buff, 4096, "select exists (select 1 from %s where id = %lld)", table_name, rowid);
+    sqlite3_prepare_v2(_db, sql, -1, &stmt, NULL);
+    int rc = sqlite3_step(stmt);                                                                    /* 3 */
+
+    if (rc == SQLITE_DONE) {
+        exists = sqlite3_column_bytes(stmt,0) == 1;
+    } else {
+        char buff[2048];
+        sprintf(buff,"ERROR stepping statement: %s\n", sqlite3_errmsg(_db));
+        sqlite3_finalize(stmt);
+        throw APSQLException(std::string(buff));
+    }
+    sqlite3_finalize(stmt);
+    return exists;
+}
