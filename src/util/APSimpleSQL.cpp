@@ -82,14 +82,11 @@ bool APSimpleSQL::RowExists(const char* table_name, int64_t rowid) {
     sqlite3_stmt* stmt;
     char buff[4096];
     snprintf(buff, 4096, "select exists (select 1 from %s where id = %lld)", table_name, rowid);
-    fprintf(stdout, "Trying %s\n", buff);
-    printf("Row %s:%lld exists: ", table_name, rowid);
     sqlite3_prepare_v2(_db, buff, -1, &stmt, NULL);
     int rc = sqlite3_step(stmt);                                                                    /* 3 */
 
     if (rc == SQLITE_ROW) {
         exists = sqlite3_column_int(stmt,0) == 1;
-        printf("%s\n", exists ? "YES":"NO");
     } else {
         char buff[2048];
         sprintf(buff,"ERROR with row exists statement: %s\n", sqlite3_errmsg(_db));
