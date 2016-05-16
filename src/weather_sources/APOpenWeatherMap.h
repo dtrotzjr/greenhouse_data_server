@@ -18,7 +18,7 @@ private:
     APSimpleJSONQuery* _jsonQueryObj;
 
     char* _getForecast(Json::Value& config);
-    void _parseResponse(char* response, APSimpleSQL* db);
+    void _parseForecastResponse(char *response, APSimpleSQL *db);
 };
 
 
