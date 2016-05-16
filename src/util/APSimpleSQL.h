@@ -17,6 +17,7 @@ public:
     void RollbackTransaction();
 
     void DoSQL(const char* sql);
+    int64_t DoInsert(const char* sql);
 
     bool RowExists(const char* table_name, int64_t rowid);
 private:

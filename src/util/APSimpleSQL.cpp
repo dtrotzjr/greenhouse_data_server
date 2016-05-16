@@ -24,6 +24,7 @@ APSimpleSQL::APSimpleSQL(std::string databaseFile) {
 
 APSimpleSQL::~APSimpleSQL() {
     sqlite3_close(_db);
+    printf("Closed database");
 }
 
 void APSimpleSQL::BeginTransaction() {
@@ -58,7 +59,6 @@ void APSimpleSQL::RollbackTransaction() {
 }
 
 void APSimpleSQL::DoSQL(const char* sql) {
-    bool failed = false;
     sqlite3_stmt* stmt;
     sqlite3_prepare_v2(_db, sql, -1, &stmt, NULL);
     int rc = sqlite3_step(stmt);                                                                    /* 3 */
@@ -70,19 +70,29 @@ void APSimpleSQL::DoSQL(const char* sql) {
     }
 }
 
+int64_t APSimpleSQL::DoInsert(const char* sql) {
+    int64_t lastId = -1;
+    DoSQL(sql);
+    lastId = sqlite3_last_insert_rowid(_db);
+    return lastId;
+}
+
 bool APSimpleSQL::RowExists(const char* table_name, int64_t rowid) {
     bool exists = false;
     sqlite3_stmt* stmt;
-    char* buff[4096];
+    char buff[4096];
     snprintf(buff, 4096, "select exists (select 1 from %s where id = %lld)", table_name, rowid);
-    sqlite3_prepare_v2(_db, sql, -1, &stmt, NULL);
+    fprintf(stdout, "Trying %s\n", buff);
+    printf("Row %s:%lld exists: ", table_name, rowid);
+    sqlite3_prepare_v2(_db, buff, -1, &stmt, NULL);
     int rc = sqlite3_step(stmt);                                                                    /* 3 */
 
-    if (rc == SQLITE_DONE) {
-        exists = sqlite3_column_bytes(stmt,0) == 1;
+    if (rc == SQLITE_ROW) {
+        exists = sqlite3_column_int(stmt,0) == 1;
+        printf("%s\n", exists ? "YES":"NO");
     } else {
         char buff[2048];
-        sprintf(buff,"ERROR stepping statement: %s\n", sqlite3_errmsg(_db));
+        sprintf(buff,"ERROR with row exists statement: %s\n", sqlite3_errmsg(_db));
         sqlite3_finalize(stmt);
         throw APSQLException(std::string(buff));
     }
