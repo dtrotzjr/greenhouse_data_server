@@ -19,6 +19,8 @@ private:
 
     char* _getForecast(Json::Value& config);
     void _parseForecastResponse(char *response, APSimpleSQL *db);
+    char* _getCurrentConditions(Json::Value& config);
+    void _parseCurrentConditions(char *response, APSimpleSQL *db);
 };
 
 
