@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
     if (argc == 2) {
         APWeatherDataManager* wm = new APWeatherDataManager(argv[1]);
         wm->GetLatestWeatherData();
-
+        delete(wm);
         return 0;
     }
     std::cout << "Usage " + std::string(argv[1]) + " <path to config.json>" << std::endl;

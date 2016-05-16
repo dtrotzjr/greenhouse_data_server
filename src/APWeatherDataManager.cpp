@@ -40,6 +40,7 @@ APWeatherDataManager::~APWeatherDataManager() {
         delete (*it);
     }
     delete _sources;
+    delete _sqlDb;
 }
 
 void APWeatherDataManager::GetLatestWeatherData() {
