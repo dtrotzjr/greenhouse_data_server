@@ -82,6 +82,7 @@ bool APSimpleSQL::RowExists(const char* table_name, int64_t rowid) {
     sqlite3_stmt* stmt;
     char buff[4096];
     snprintf(buff, 4096, "select exists (select 1 from %s where id = %lld)", table_name, rowid);
+    printf("\n%s\n",buff);
     sqlite3_prepare_v2(_db, buff, -1, &stmt, NULL);
     int rc = sqlite3_step(stmt);                                                                    /* 3 */
 

@@ -18,9 +18,9 @@ private:
     APSimpleJSONQuery* _jsonQueryObj;
 
     char* _getForecast(Json::Value& config);
-    void _parseForecastResponse(char *response, APSimpleSQL *db);
     char* _getCurrentConditions(Json::Value& config);
-    void _parseCurrentConditions(char *response, APSimpleSQL *db);
+    void _parseJSONResponse(char *response, APSimpleSQL *db, bool live_condition);
+    void _parseWeatherInfo(Json::Value& json, APSimpleSQL *db, bool live_condition, int64_t city_id, time_t now, int daysSinceEpoch);
 };
 
 
