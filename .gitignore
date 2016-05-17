@@ -39,3 +39,5 @@ config.json
 # Debug files
 *.dSYM/
 ._.DS_Store
+*.cpp.o
+CXX.includecache
