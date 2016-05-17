@@ -51,17 +51,30 @@ void APOpenWeatherMap::InitializeSQLTables(APSimpleSQL* db) {
 
 void APOpenWeatherMap::UpdateWeatherInfo(APSimpleSQL* db, Json::Value& config) {
     if (db != NULL) {
+        printf("Getting open weather map current conditions...\n");
         char* response = _getCurrentConditions(config);
-        printf(response);
         if (response != NULL) {
             _parseJSONResponse(response, db, true);
         }
-        response = _getForecast(config);
-        if (response != NULL) {
-            _parseJSONResponse(response, db, false);
+
+        time_t now = time(NULL);
+        int daysSinceEpoch = now / (60 * 60 * 24);
+        char buff[4096];
+        snprintf(buff, 4096,"SELECT id FROM owm_detail WHERE days_since_epoch = %d AND live_condition = 0 LIMIT 1", daysSinceEpoch);
+        db->BeginSelect(buff);
+        if (!db->StepSelect()) {
+            printf("Getting open weather map forecast...\n");
+            response = _getForecast(config);
+            if (response != NULL) {
+                _parseJSONResponse(response, db, false);
+            }
+        } else {
+            printf("Skipping open weather map forecast since we already have it for today...\n");
         }
+        db->EndSelect();
+
     } else {
-        throw APException("Database object missing!");
+        throw APException("Database object missing!\n");
     }
 }
 
@@ -182,12 +195,10 @@ void APOpenWeatherMap::_parseWeatherInfo(Json::Value& json, APSimpleSQL *db, boo
         int64_t sunrise = json["sys"]["sunrise"].asInt64();
         int64_t sunset = json["sys"]["sunset"].asInt64();
         if(db->RowExists("owm_day_info", day_id)) {
-            snprintf(buff, buffSize, "UPDATE owm_day_info SET (sunrise = %lld, sunset = %lld) WHERE id = %lld", sunrise, sunset, day_id);
-            printf("\n%s\n",buff);
+            snprintf(buff, buffSize, "UPDATE owm_day_info SET sunrise = %lld, sunset = %lld WHERE id = %lld", sunrise, sunset, day_id);
             db->DoSQL(buff);
         } else {
             snprintf(buff, buffSize, "INSERT INTO owm_day_info (id, sunrise ,sunset) VALUES (%lld, %lld, %lld)", day_id, sunrise, sunset);
-            printf("\n%s\n",buff);
             db->DoSQL(buff);
         }
     }

@@ -27,6 +27,7 @@ CMakeFiles/greenhouse_data_server.dir/src/main.cpp.o: /usr/include/jsoncpp/json/
 CMakeFiles/greenhouse_data_server.dir/src/main.cpp.o: /usr/include/jsoncpp/json/reader.h
 CMakeFiles/greenhouse_data_server.dir/src/main.cpp.o: /usr/include/jsoncpp/json/value.h
 CMakeFiles/greenhouse_data_server.dir/src/main.cpp.o: /usr/include/jsoncpp/json/writer.h
+CMakeFiles/greenhouse_data_server.dir/src/main.cpp.o: src/util/APException.h
 CMakeFiles/greenhouse_data_server.dir/src/main.cpp.o: src/weather_sources/APWeatherSource.h
 
 CMakeFiles/greenhouse_data_server.dir/src/util/APException.cpp.o: src/util/APException.cpp

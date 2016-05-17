@@ -65,9 +65,70 @@ void APSimpleSQL::DoSQL(const char* sql) {
     sqlite3_finalize(stmt);
     if (rc != SQLITE_DONE) {
         char buff[2048];
-        sprintf(buff,"ERROR stepping statement: %s\n", sqlite3_errmsg(_db));
+        sprintf(buff,"ERROR stepping statement (%s): %s\n", sql, sqlite3_errmsg(_db));
         throw APSQLException(std::string(buff));
     }
+}
+
+bool APSimpleSQL::StepSelect() {
+    bool step_result;
+    if (_select_stmt != NULL) {
+        int rc = sqlite3_step(_select_stmt);                                                                    /* 3 */
+        if (rc == SQLITE_ROW) {
+            step_result = true;
+        } else if (rc == SQLITE_DONE) {
+            step_result = false;
+        } else {
+            char buff[2048];
+            sprintf(buff,"ERROR stepping statement: %s\n", sqlite3_errmsg(_db));
+            throw APSQLException(std::string(buff));
+        }
+    }
+    return step_result;
+}
+
+int64_t  APSimpleSQL::GetColAsInt64(int colIndex) {
+    int64_t retval;
+    if (_select_stmt != NULL) {
+        retval = sqlite3_column_int64(_select_stmt, colIndex);
+    } else {
+        char buff[2048];
+        sprintf(buff,"ERROR getting column value as int64: %s\n", sqlite3_errmsg(_db));
+        throw APSQLException(std::string(buff));
+    }
+    return retval;
+}
+
+const unsigned char* APSimpleSQL::GetColAsString(int colIndex) {
+    const unsigned char* retval;
+    if (_select_stmt != NULL) {
+        retval = sqlite3_column_text(_select_stmt, colIndex);
+    } else {
+        char buff[2048];
+        sprintf(buff,"ERROR getting column value as int64: %s\n", sqlite3_errmsg(_db));
+        throw APSQLException(std::string(buff));
+    }
+    return retval;
+}
+
+double APSimpleSQL::GetColAsDouble(int colIndex) {
+    double retval;
+    if (_select_stmt != NULL) {
+        retval = sqlite3_column_double(_select_stmt, colIndex);
+    } else {
+        char buff[2048];
+        sprintf(buff,"ERROR getting column value as int64: %s\n", sqlite3_errmsg(_db));
+        throw APSQLException(std::string(buff));
+    }
+    return retval;
+}
+
+void APSimpleSQL::EndSelect() {
+    sqlite3_finalize(_select_stmt);
+}
+
+void APSimpleSQL::BeginSelect(const char* sql) {
+    sqlite3_prepare_v2(_db, sql, -1, &_select_stmt, NULL);
 }
 
 int64_t APSimpleSQL::DoInsert(const char* sql) {
@@ -82,7 +143,6 @@ bool APSimpleSQL::RowExists(const char* table_name, int64_t rowid) {
     sqlite3_stmt* stmt;
     char buff[4096];
     snprintf(buff, 4096, "select exists (select 1 from %s where id = %lld)", table_name, rowid);
-    printf("\n%s\n",buff);
     sqlite3_prepare_v2(_db, buff, -1, &stmt, NULL);
     int rc = sqlite3_step(stmt);                                                                    /* 3 */
 
