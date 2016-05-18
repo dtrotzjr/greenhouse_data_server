@@ -6,8 +6,11 @@
 #define GREENHOUSE_DATA_SERVER_APSIMPLESQL_H
 #include <string>
 #include <sqlite3.h>
+#include <vector>
+#include "APKeyValuePair.h"
 
 struct sqlite3;
+class APKeyValuePair;
 
 class APSimpleSQL {
 public:
@@ -20,6 +23,7 @@ public:
 
     void DoSQL(const char* sql);
     int64_t DoInsert(const char* sql);
+    int64_t DoInsert(const char* tableName, std::vector<APKeyValuePair*>* pairs);
 
     bool RowExists(const char* table_name, int64_t rowid);
 

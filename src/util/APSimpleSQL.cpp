@@ -4,7 +4,9 @@
 
 #include "APSimpleSQL.h"
 #include "APSQLException.h"
+#include "APKeyValuePair.h"
 #include <sqlite3.h>
+#include <vector>
 
 APSimpleSQL::APSimpleSQL(std::string databaseFile) {
     if (databaseFile.length() > 0) {
@@ -136,6 +138,13 @@ int64_t APSimpleSQL::DoInsert(const char* sql) {
     DoSQL(sql);
     lastId = sqlite3_last_insert_rowid(_db);
     return lastId;
+}
+
+int64_t APSimpleSQL::DoInsert(const char* tableName, std::vector<APKeyValuePair*>* pairs) {
+    int buffLen = 32768;
+    char buff[buffLen];
+    snprintf(buff, buffLen, "INSERT INTO %s (");
+    for ()
 }
 
 bool APSimpleSQL::RowExists(const char* table_name, int64_t rowid) {

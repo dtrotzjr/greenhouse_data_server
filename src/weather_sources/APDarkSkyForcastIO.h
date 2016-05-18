@@ -12,7 +12,9 @@ class APDarkSkyForcastIO : public APWeatherSource {
 public:
     virtual void InitializeSQLTables(APSimpleSQL* db);
     virtual void UpdateWeatherInfo(APSimpleSQL* db, Json::Value& config);
-private:
+protected:
+    char* _getForecast(Json::Value& config);
+    void _parseJSONResponse(char *response, APSimpleSQL *db, bool live_condition);
 
 };
 

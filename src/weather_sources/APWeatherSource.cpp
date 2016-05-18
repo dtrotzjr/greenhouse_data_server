@@ -3,3 +3,13 @@
 //
 
 #include "APWeatherSource.h"
+#include "APSimpleJSONQuery.h"
+
+
+APWeatherSource::APWeatherSource() {
+    _jsonQueryObj = new APSimpleJSONQuery();
+};
+
+APWeatherSource::~APWeatherSource() {
+    delete _jsonQueryObj;
+};

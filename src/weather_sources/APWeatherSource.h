@@ -7,13 +7,16 @@
 
 #include <json/value.h>
 class APSimpleSQL;
+class APSimpleJSONQuery;
 
 class APWeatherSource {
 public:
-    APWeatherSource() {};
-    virtual ~APWeatherSource() {};
+    APWeatherSource();
+    virtual ~APWeatherSource();
     virtual void UpdateWeatherInfo(APSimpleSQL* db, Json::Value& config) = 0;
     virtual void InitializeSQLTables(APSimpleSQL* db) = 0;
+protected:
+    APSimpleJSONQuery* _jsonQueryObj;
 };
 
 

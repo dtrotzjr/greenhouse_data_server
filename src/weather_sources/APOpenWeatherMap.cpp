@@ -15,7 +15,6 @@
 #include <json/json.h>
 
 APOpenWeatherMap::APOpenWeatherMap() {
-    _jsonQueryObj = new APSimpleJSONQuery();
 }
 
 APOpenWeatherMap::~APOpenWeatherMap() {
