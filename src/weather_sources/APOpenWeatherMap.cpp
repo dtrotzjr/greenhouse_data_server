@@ -227,12 +227,19 @@ void APOpenWeatherMap::_parseWeatherInfo(Json::Value& json, APSimpleSQL *db, boo
         snow_3h = json["snow"]["3h"].asFloat();
     }
 
-    snprintf(buff, buffSize, "INSERT INTO owm_detail (dt, main_temp_k, main_temp_min_k, main_temp_max_k, main_pressure, main_humidity, clouds_percent, wind_speed_mps, wind_deg, rain_vol_last_3h, snow_last_3h, days_since_epoch, live_condition, owm_day_id, owm_city_id) VALUES ('%lld', '%f', '%f', '%f', '%f', '%d', '%d', '%f', '%f', '%f', '%f', '%d', '%d', '%lld', '%lld');", dt, main_temp_k, main_temp_min_k, main_temp_max_k, main_pressure, main_humidity, clouds_all, wind_speed, wind_deg, rain_3h, snow_3h, daysSinceEpoch, live_condition, day_id, city_id);
-    int64_t lastRowId = db->DoInsert(buff);
-    if (lastRowId >= 0) {
-        for (std::vector<int64_t>::iterator it = weather_conditions.begin() ; it != weather_conditions.end(); ++it) {
-            snprintf(buff, buffSize, "INSERT INTO owm_detail_to_weather_map (owm_detail_id, owm_weather_id) VALUES (%lld, %lld)", lastRowId, (*it));
-            db->DoSQL(buff);
+    snprintf(buff, buffSize, "SELECT dt FROM owm_detail WHERE dt = %lld AND live_condition = %d", dt, live_condition);
+    db->BeginSelect(buff);
+    if (!db->StepSelect()) {
+        snprintf(buff, buffSize, "INSERT INTO owm_detail (dt, main_temp_k, main_temp_min_k, main_temp_max_k, main_pressure, main_humidity, clouds_percent, wind_speed_mps, wind_deg, rain_vol_last_3h, snow_last_3h, days_since_epoch, live_condition, owm_day_id, owm_city_id) VALUES ('%lld', '%f', '%f', '%f', '%f', '%d', '%d', '%f', '%f', '%f', '%f', '%d', '%d', '%lld', '%lld');", dt, main_temp_k, main_temp_min_k, main_temp_max_k, main_pressure, main_humidity, clouds_all, wind_speed, wind_deg, rain_3h, snow_3h, daysSinceEpoch, live_condition, day_id, city_id);
+        int64_t lastRowId = db->DoInsert(buff);
+        if (lastRowId >= 0) {
+            for (std::vector<int64_t>::iterator it = weather_conditions.begin() ; it != weather_conditions.end(); ++it) {
+                snprintf(buff, buffSize, "INSERT INTO owm_detail_to_weather_map (owm_detail_id, owm_weather_id) VALUES (%lld, %lld)", lastRowId, (*it));
+                db->DoSQL(buff);
+            }
         }
+    } else {
+        fprintf(stdout, "Skipping owm_detail %lld since we have already seen this timestamp's details\n", dt);
     }
+    db->EndSelect();
 }
