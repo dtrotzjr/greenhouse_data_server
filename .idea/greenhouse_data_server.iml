@@ -5,7 +5,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src/APWeatherDataManager.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/APWeatherDataManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/APSQLException.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/util/APKeyValuePair.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/APSQLException.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/util/APKeyValuePair.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/APException.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/APSimpleSQL.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/APSimpleSQL.cpp" isTestSource="false" />
