@@ -70,6 +70,14 @@ void APSimpleSQL::DoSQL(const char* sql) {
     }
 }
 
+void APSimpleSQL::BeginSelect(const char* sql) {
+    sqlite3_prepare_v2(_db, sql, -1, &_select_stmt, NULL);
+}
+
+void APSimpleSQL::EndSelect() {
+    sqlite3_finalize(_select_stmt);
+}
+
 bool APSimpleSQL::StepSelect() {
     bool step_result;
     if (_select_stmt != NULL) {
@@ -121,14 +129,6 @@ double APSimpleSQL::GetColAsDouble(int colIndex) {
         throw APSQLException(std::string(buff));
     }
     return retval;
-}
-
-void APSimpleSQL::EndSelect() {
-    sqlite3_finalize(_select_stmt);
-}
-
-void APSimpleSQL::BeginSelect(const char* sql) {
-    sqlite3_prepare_v2(_db, sql, -1, &_select_stmt, NULL);
 }
 
 int64_t APSimpleSQL::DoInsert(const char* sql) {
