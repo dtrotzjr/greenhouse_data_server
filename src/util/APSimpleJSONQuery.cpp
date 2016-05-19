@@ -42,6 +42,7 @@ char* APSimpleJSONQuery::GetJSONResponseFromURL(const char* url) {
         }
         curl_easy_cleanup(curl);
     }
+//    printf("\n+++++\n%s\n+++++\n", _curlResponseChunk.buffer);
     return _curlResponseChunk.buffer;
 }
 

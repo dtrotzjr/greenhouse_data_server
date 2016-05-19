@@ -26,6 +26,9 @@ APWeatherDataManager::APWeatherDataManager(std::string configPath) {
             APOpenWeatherMap* openWeatherMap = new APOpenWeatherMap();
             openWeatherMap->InitializeSQLTables(_sqlDb);
             _sources->push_back(openWeatherMap);
+            APDarkSkyForcastIO* forecastIO = new APDarkSkyForcastIO();
+            forecastIO->InitializeSQLTables(_sqlDb);
+            _sources->push_back(forecastIO);
         } else {
             throw APException("Missing database file in config file.");
         }

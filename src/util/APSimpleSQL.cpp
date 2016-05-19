@@ -7,6 +7,8 @@
 #include "APKeyValuePair.h"
 #include <sqlite3.h>
 #include <vector>
+#include <string.h>
+#include <string>
 
 APSimpleSQL::APSimpleSQL(std::string databaseFile) {
     if (databaseFile.length() > 0) {
@@ -143,8 +145,25 @@ int64_t APSimpleSQL::DoInsert(const char* sql) {
 int64_t APSimpleSQL::DoInsert(const char* tableName, std::vector<APKeyValuePair*>* pairs) {
     int buffLen = 32768;
     char buff[buffLen];
-    snprintf(buff, buffLen, "INSERT INTO %s (");
-    for ()
+    snprintf(buff, buffLen, "INSERT INTO %s (", tableName);
+    for (std::vector<APKeyValuePair*>::iterator it = pairs->begin() ; it != pairs->end(); ++it) {
+        if (it != pairs->begin()) {
+            strncat(buff, ",", buffLen);
+        }
+        strncat(buff, (*it)->GetKey().c_str(), buffLen);
+    }
+    strncat(buff, ") VALUES (", buffLen);
+    for (std::vector<APKeyValuePair*>::iterator it = pairs->begin() ; it != pairs->end(); ++it) {
+        if (it != pairs->begin()) {
+            strncat(buff, ",", buffLen);
+        }
+        strncat(buff, "'", buffLen);
+        strncat(buff, (*it)->GetValue().c_str(), buffLen);
+        strncat(buff, "'", buffLen);
+    }
+    strncat(buff, ");", buffLen);
+    printf("\n%s\n", buff);
+    return DoInsert(buff);
 }
 
 bool APSimpleSQL::RowExists(const char* table_name, int64_t rowid) {

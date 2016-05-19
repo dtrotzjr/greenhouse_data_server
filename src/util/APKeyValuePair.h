@@ -4,9 +4,10 @@
 
 #ifndef GREENHOUSE_DATA_SERVER_APKEYVALUEPAIR_H
 #define GREENHOUSE_DATA_SERVER_APKEYVALUEPAIR_H
-
+#include <string>
 
 class APKeyValuePair {
+public:
     APKeyValuePair(std::string key, std::string value);
     APKeyValuePair(std::string key, int64_t value);
     APKeyValuePair(std::string key, double value);
