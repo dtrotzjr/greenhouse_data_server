@@ -162,7 +162,7 @@ int64_t APSimpleSQL::DoInsert(const char* tableName, std::vector<APKeyValuePair*
         strncat(buff, "'", buffLen);
     }
     strncat(buff, ");", buffLen);
-    printf("\n%s\n", buff);
+//    printf("\n%s\n", buff);
     return DoInsert(buff);
 }
 
