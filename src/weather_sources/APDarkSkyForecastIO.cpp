@@ -213,11 +213,14 @@ void APDarkSkyForecastIO::_freeVectorAndData(std::vector<APKeyValuePair*>* pairs
 void APDarkSkyForecastIO::_parseDataJSONEntry(APSimpleSQL *db, int64_t forecast_id, int64_t masterTimestamp,
                                               Json::Value &json, std::vector<APKeyValuePair *> *pairs) {
     APKeyValuePair* pair;
+    time_t time;
     // Timestamp
     if (json["time"] != Json::Value::null) {
+        time = (time_t)json["time"].asInt64();
         pair = new APKeyValuePair("time", json["time"].asInt64());
         pairs->push_back(pair);
     } else {
+        time = (time_t)masterTimestamp;
         pair = new APKeyValuePair("time", masterTimestamp);
         pairs->push_back(pair);
     }
@@ -365,4 +368,24 @@ void APDarkSkyForecastIO::_parseDataJSONEntry(APSimpleSQL *db, int64_t forecast_
     }
     pair = new APKeyValuePair("fio_forecast_id", forecast_id);
     pairs->push_back(pair);
+
+    // fio_day_info
+    if (json["sunriseTime"] != Json::Value::null && json["sunsetTime"] != Json::Value::null && json["moonPhase"] != Json::Value::null) {
+        std::vector<APKeyValuePair*>* dayPairs = new std::vector<APKeyValuePair*>();
+        struct tm *today = localtime(&time);
+        today->tm_hour = 0;
+        today->tm_min = 0;
+        today->tm_sec = 0;
+        int64_t day_id = (int64_t)mktime(today);
+        pair = new APKeyValuePair("id", day_id);
+        dayPairs->push_back(pair);
+        pair = new APKeyValuePair("sunrise", json["sunriseTime"].asInt64());
+        dayPairs->push_back(pair);
+        pair = new APKeyValuePair("sunset", json["sunsetTime"].asInt64());
+        dayPairs->push_back(pair);
+        pair = new APKeyValuePair("moon_phase", json["moonPhase"].asDouble());
+        dayPairs->push_back(pair);
+        db->DoInsert("fio_day_info", dayPairs);
+        _freeVectorAndData(dayPairs);
+    }
 }
