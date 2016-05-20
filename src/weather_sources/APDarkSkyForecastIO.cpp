@@ -8,25 +8,13 @@
 #include "APSQLException.h"
 #include <sstream>
 
-#define AP_FIO_TYPE_CURRENTLY   "currently"
-#define AP_FIO_TYPE_MINUTELY    "minutely"
-#define AP_FIO_TYPE_HOURLY      "hourly"
-#define AP_FIO_TYPE_DAILY       "daily"
-
-enum class APForecastType : int64_t {
-    Currently = 1,
-    Minutely,
-    Hourly,
-    Daily
-};
-
 void APDarkSkyForecastIO::InitializeSQLTables(APSimpleSQL* db) {
     // Create the needed tables
     if (db != NULL) {
         db->BeginTransaction();
         try{
-            db->DoSQL("CREATE TABLE IF NOT EXISTS fio_forecast (id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER, type_id INTEGER REFERENCES fio_forecast_type(id) ON DELETE NO ACTION, summary_id INTEGER REFERENCES fio_summary(id) ON DELETE SET NULL, icon_id INTEGER REFERENCES fio_icon(id) ON DELETE NO ACTION);");
-            db->DoSQL("CREATE INDEX IF NOT EXISTS fio_forecast_time_idx ON fio_forecast(time);");
+            db->DoSQL("CREATE TABLE IF NOT EXISTS fio_forecast (id INTEGER PRIMARY KEY AUTOINCREMENT, master_timestamp INTEGER, type_id INTEGER REFERENCES fio_forecast_type(id) ON DELETE NO ACTION, summary_id INTEGER REFERENCES fio_summary(id) ON DELETE SET NULL, icon_id INTEGER REFERENCES fio_icon(id) ON DELETE NO ACTION);");
+            db->DoSQL("CREATE INDEX IF NOT EXISTS fio_forecast_time_idx ON fio_forecast(master_timestamp);");
 
             db->DoSQL("CREATE TABLE IF NOT EXISTS fio_forecast_type (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT UNIQUE);");
             db->DoSQL("CREATE INDEX IF NOT EXISTS fio_forecast_type_idx ON fio_forecast_type(type);");
@@ -77,9 +65,12 @@ void APDarkSkyForecastIO::UpdateWeatherInfo(APSimpleSQL* db, Json::Value& config
     if (db != NULL) {
         printf("Getting Forecast.io weather conditions...\n");
         char *response = _getJSONFromForecastIOService(config);
+        printf("Parsing Forecast.io weather conditions...\n");
         if (response != NULL) {
             _parseJSONResponse(response, db, true);
         }
+        printf("DONE: Forecast.io weather conditions...\n");
+
     }
 }
 
@@ -113,12 +104,23 @@ void APDarkSkyForecastIO::_parseJSONResponse(char *response, APSimpleSQL *db, bo
         if (currently != Json::Value::null && currently["time"] != Json::Value::null) {
             // time
             int64_t masterTimestamp = currently["time"].asInt64();
-            _parseForecastJSONEntry(db, masterTimestamp, currently);
+            _parseForecastJSONEntry(db, masterTimestamp, currently, APForecastType::Currently);
 
             // Daily
-            Json::Value daily = json[AP_FIO_TYPE_DAILY];
-            if (daily != Json::Value::null) {
+            time_t now = time(NULL);
+            struct tm *today = localtime(&now);
+            today->tm_hour = 0;
+            today->tm_min = 0;
+            today->tm_sec = 0;
+            int64_t startOfToday = (int64_t)mktime(today);
+            snprintf(buff, buffSize, "SELECT id FROM fio_forecast WHERE master_timestamp > %lld AND type_id == %lld LIMIT 1", startOfToday, (int64_t)APForecastType::Daily);
+            db->BeginSelect(buff);
+            bool needDaily = !db->StepSelect();
+            db->EndSelect();
 
+            Json::Value daily = json[AP_FIO_TYPE_DAILY];
+            if (needDaily && daily != Json::Value::null) {
+                _parseForecastJSONEntry(db, masterTimestamp, daily, APForecastType::Daily);
             }
 
         }
@@ -130,14 +132,14 @@ void APDarkSkyForecastIO::_parseJSONResponse(char *response, APSimpleSQL *db, bo
     db->EndTransaction();
 }
 
-void APDarkSkyForecastIO::_parseForecastJSONEntry(APSimpleSQL *db, int64_t masterTimestamp, Json::Value &json) {
+void APDarkSkyForecastIO::_parseForecastJSONEntry(APSimpleSQL *db, int64_t masterTimestamp, Json::Value &json, APForecastType forecastType) {
     // Prep and store the main forecast object
     std::vector<APKeyValuePair*>* pairs = new std::vector<APKeyValuePair*>();
     // type
-    APKeyValuePair* pair = new APKeyValuePair("type_id", (int64_t)APForecastType::Currently);
+    APKeyValuePair* pair = new APKeyValuePair("type_id", (int64_t)forecastType);
     pairs->push_back(pair);
 
-    pair = new APKeyValuePair("time", masterTimestamp);
+    pair = new APKeyValuePair("master_timestamp", masterTimestamp);
     pairs->push_back(pair);
     // summary
     if (json["summary"] != Json::Value::null) {
@@ -152,14 +154,25 @@ void APDarkSkyForecastIO::_parseForecastJSONEntry(APSimpleSQL *db, int64_t maste
         pairs->push_back(pair);
     }
     int64_t forecast_id = db->DoInsert("fio_forecast", pairs);
-    // Cleanup
     _freeVectorAndData(pairs);
 
-    pairs = new std::vector<APKeyValuePair*>();
-    _parseDataJSONEntry(db, forecast_id, masterTimestamp, json, pairs);
-    int64_t data_id = db->DoInsert("fio_data", pairs);
-    // Cleanup
-    _freeVectorAndData(pairs);
+
+    Json::Value datum = json["data"];
+    if (datum != Json::Value::null) {
+        for (Json::Value& data : datum) {
+            pairs = new std::vector<APKeyValuePair*>();
+            _parseDataJSONEntry(db, forecast_id, masterTimestamp, data, pairs);
+            int64_t data_id = db->DoInsert("fio_data", pairs);
+            // Cleanup
+            _freeVectorAndData(pairs);
+        }
+    } else {
+        // Currently stores the data at the same level as the forecast entry
+        pairs = new std::vector<APKeyValuePair*>();
+        _parseDataJSONEntry(db, forecast_id, masterTimestamp, json, pairs);
+        int64_t data_id = db->DoInsert("fio_data", pairs);
+        _freeVectorAndData(pairs);
+    }
 }
 
 int64_t APDarkSkyForecastIO::_getOrCreateIconId(APSimpleSQL *db, std::string iconName) {
