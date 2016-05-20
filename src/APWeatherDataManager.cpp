@@ -4,7 +4,7 @@
 
 #include "APWeatherDataManager.h"
 #include "APOpenWeatherMap.h"
-#include "APDarkSkyForcastIO.h"
+#include "APDarkSkyForecastIO.h"
 #include "APException.h"
 #include "APSimpleSQL.h"
 #include <fstream>
@@ -26,7 +26,7 @@ APWeatherDataManager::APWeatherDataManager(std::string configPath) {
             APOpenWeatherMap* openWeatherMap = new APOpenWeatherMap();
             openWeatherMap->InitializeSQLTables(_sqlDb);
             _sources->push_back(openWeatherMap);
-            APDarkSkyForcastIO* forecastIO = new APDarkSkyForcastIO();
+            APDarkSkyForecastIO* forecastIO = new APDarkSkyForecastIO();
             forecastIO->InitializeSQLTables(_sqlDb);
             _sources->push_back(forecastIO);
         } else {
