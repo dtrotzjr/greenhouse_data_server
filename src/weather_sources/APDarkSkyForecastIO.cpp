@@ -377,15 +377,17 @@ void APDarkSkyForecastIO::_parseDataJSONEntry(APSimpleSQL *db, int64_t forecast_
         today->tm_min = 0;
         today->tm_sec = 0;
         int64_t day_id = (int64_t)mktime(today);
-        pair = new APKeyValuePair("id", day_id);
-        dayPairs->push_back(pair);
-        pair = new APKeyValuePair("sunrise", json["sunriseTime"].asInt64());
-        dayPairs->push_back(pair);
-        pair = new APKeyValuePair("sunset", json["sunsetTime"].asInt64());
-        dayPairs->push_back(pair);
-        pair = new APKeyValuePair("moon_phase", json["moonPhase"].asDouble());
-        dayPairs->push_back(pair);
-        db->DoInsert("fio_day_info", dayPairs);
-        _freeVectorAndData(dayPairs);
+        if (!db->RowExists("fio_day_info", day_id)) {
+            pair = new APKeyValuePair("id", day_id);
+            dayPairs->push_back(pair);
+            pair = new APKeyValuePair("sunrise", json["sunriseTime"].asInt64());
+            dayPairs->push_back(pair);
+            pair = new APKeyValuePair("sunset", json["sunsetTime"].asInt64());
+            dayPairs->push_back(pair);
+            pair = new APKeyValuePair("moon_phase", json["moonPhase"].asDouble());
+            dayPairs->push_back(pair);
+            db->DoInsert("fio_day_info", dayPairs);
+            _freeVectorAndData(dayPairs);
+        }
     }
 }
