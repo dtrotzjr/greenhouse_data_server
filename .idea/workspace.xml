@@ -12,19 +12,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97f4153f-f907-45c0-b9ca-a231b45d4ff5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/util/APKeyValuePair.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/util/APKeyValuePair.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/greenhouse_data_server.iml" afterPath="$PROJECT_DIR$/.idea/greenhouse_data_server.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/DependInfo.cmake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/build.make" afterPath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/build.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/cmake_clean.cmake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/depend.internal" afterPath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/depend.internal" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/depend.make" afterPath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/depend.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/link.txt" afterPath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/link.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/progress.make" afterPath="$PROJECT_DIR$/CMakeFiles/greenhouse_data_server.dir/progress.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/CMakeFiles/progress.marks" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/APSimpleSQL.cpp" afterPath="$PROJECT_DIR$/src/util/APSimpleSQL.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/APSimpleSQL.h" afterPath="$PROJECT_DIR$/src/util/APSimpleSQL.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.cpp" afterPath="$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.h" afterPath="$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/weather_sources/APOpenWeatherMap.cpp" afterPath="$PROJECT_DIR$/src/weather_sources/APOpenWeatherMap.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/weather_sources/APOpenWeatherMap.h" afterPath="$PROJECT_DIR$/src/weather_sources/APOpenWeatherMap.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/weather_sources/APWeatherSource.cpp" afterPath="$PROJECT_DIR$/src/weather_sources/APWeatherSource.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/weather_sources/APWeatherSource.h" afterPath="$PROJECT_DIR$/src/weather_sources/APWeatherSource.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Makefile" afterPath="$PROJECT_DIR$/Makefile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/weather_sources/APDarkSkyForecastIO.cpp" afterPath="$PROJECT_DIR$/src/weather_sources/APDarkSkyForecastIO.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/weather_sources/APDarkSkyForecastIO.h" afterPath="$PROJECT_DIR$/src/weather_sources/APDarkSkyForecastIO.h" />
     </list>
     <ignored path="greenhouse_data_server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,46 +50,19 @@
       <file leaf-file-name="APOpenWeatherMap.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/weather_sources/APOpenWeatherMap.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1545">
-              <caret line="36" column="244" selection-start-line="36" selection-start-column="244" selection-end-line="36" selection-end-column="244" />
+            <state relative-caret-position="346">
+              <caret line="191" column="44" selection-start-line="187" selection-start-column="4" selection-end-line="191" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="APWeatherSource.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/weather_sources/APWeatherSource.cpp">
+      <file leaf-file-name="APDarkSkyForecastIO.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/weather_sources/APDarkSkyForecastIO.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding>
-                <element signature="e#45#73#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="APDarkSkyForcastIO.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="137" selection-start-line="13" selection-start-column="137" selection-end-line="13" selection-end-column="137" />
-              <folding>
-                <marker date="1463544561000" expanded="true" signature="187:1220" placeholder="{...}" />
-                <marker date="1463544561000" expanded="true" signature="1303:1306" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="APDarkSkyForcastIO.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="82" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="82" />
-              <folding>
-                <marker date="1463543275000" expanded="true" signature="249:529" placeholder="{...}" />
-              </folding>
+            <state relative-caret-position="105">
+              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -95,18 +70,50 @@
       <file leaf-file-name="APSimpleSQL.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/util/APSimpleSQL.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+            <state relative-caret-position="135">
+              <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="APSimpleSQL.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="APSimpleJSONQuery.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/util/APSimpleJSONQuery.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="675">
+              <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="APDarkSkyForecastIO.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/weather_sources/APDarkSkyForecastIO.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="2" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
+              <folding>
+                <element signature="e#149#177#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="APSimpleSQL.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/util/APSimpleSQL.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="146" column="9" selection-start-line="146" selection-start-column="9" selection-end-line="146" selection-end-column="9" />
+            <state relative-caret-position="699">
+              <caret line="165" column="20" selection-start-line="165" selection-start-column="20" selection-end-line="165" selection-end-column="20" />
               <folding>
                 <element signature="e#45#69#0" expanded="true" />
               </folding>
@@ -114,33 +121,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="APKeyValuePair.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/util/APKeyValuePair.cpp">
+      <file leaf-file-name="APWeatherDataManager.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/APWeatherDataManager.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
-              <folding>
-                <element signature="e#45#72#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="APKeyValuePair.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/util/APKeyValuePair.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="15" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="APWeatherSource.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/weather_sources/APWeatherSource.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+            <state relative-caret-position="450">
+              <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -151,6 +136,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
               <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="APWeatherSource.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/weather_sources/APWeatherSource.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -176,20 +171,22 @@
         <option value="$PROJECT_DIR$/src/util/APSQLException.h" />
         <option value="$PROJECT_DIR$/src/util/APSQLException.cpp" />
         <option value="$PROJECT_DIR$/src/util/APSimpleJSONQuery.h" />
-        <option value="$PROJECT_DIR$/src/util/APSimpleJSONQuery.cpp" />
         <option value="$PROJECT_DIR$/src/APWeatherDataManager.h" />
-        <option value="$PROJECT_DIR$/src/APWeatherDataManager.cpp" />
         <option value="$PROJECT_DIR$/src/main.cpp" />
-        <option value="$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.h" />
-        <option value="$PROJECT_DIR$/src/weather_sources/APOpenWeatherMap.cpp" />
         <option value="$PROJECT_DIR$/src/weather_sources/APOpenWeatherMap.h" />
         <option value="$PROJECT_DIR$/src/weather_sources/APWeatherSource.h" />
         <option value="$PROJECT_DIR$/src/weather_sources/APWeatherSource.cpp" />
-        <option value="$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.cpp" />
-        <option value="$PROJECT_DIR$/src/util/APKeyValuePair.h" />
         <option value="$PROJECT_DIR$/src/util/APKeyValuePair.cpp" />
         <option value="$PROJECT_DIR$/src/util/APSimpleSQL.h" />
+        <option value="$PROJECT_DIR$/src/weather_sources/APOpenWeatherMap.cpp" />
+        <option value="$PROJECT_DIR$/src/util/APKeyValuePair.h" />
+        <option value="$PROJECT_DIR$/src/APWeatherDataManager.cpp" />
+        <option value="$PROJECT_DIR$/src/util/APSimpleJSONQuery.cpp" />
         <option value="$PROJECT_DIR$/src/util/APSimpleSQL.cpp" />
+        <option value="$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.h" />
+        <option value="$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.cpp" />
+        <option value="$PROJECT_DIR$/src/weather_sources/APDarkSkyForecastIO.h" />
+        <option value="$PROJECT_DIR$/src/weather_sources/APDarkSkyForecastIO.cpp" />
       </list>
     </option>
   </component>
@@ -201,9 +198,8 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
     <option name="width" value="1920" />
-    <option name="height" value="1173" />
+    <option name="height" value="1200" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -307,6 +303,7 @@
     <property name="settings.editor.selected.configurable" value="CPPToolchains" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -506,25 +503,25 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="1173" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1200" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27119535" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19148937" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920355" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19115044" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31238937" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920355" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934132" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283433" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3273453" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37294334" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -554,14 +551,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.h">
+    <entry file="file://$PROJECT_DIR$/src/weather_sources/APDarkSkyForecastIO.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
@@ -767,7 +757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60975">
           <caret line="4065" column="48" selection-start-line="4065" selection-start-column="30" selection-end-line="4065" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -782,49 +771,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/APWeatherDataManager.cpp">
+    <entry file="file://$PROJECT_DIR$/src/weather_sources/APWeatherSource.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="24" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
-          <folding />
+        <state relative-caret-position="165">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/APSimpleJSONQuery.cpp">
+    <entry file="file://$PROJECT_DIR$/src/util/APKeyValuePair.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+        <state relative-caret-position="435">
+          <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+    <entry file="file://$PROJECT_DIR$/src/util/APKeyValuePair.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="82" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="82" />
-          <folding>
-            <marker date="1463543275000" expanded="true" signature="249:529" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/weather_sources/APOpenWeatherMap.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+        <state relative-caret-position="90">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -837,68 +804,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/weather_sources/APWeatherSource.cpp">
+    <entry file="file://$PROJECT_DIR$/src/weather_sources/APOpenWeatherMap.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding>
-            <element signature="e#45#73#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/weather_sources/APDarkSkyForcastIO.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="137" selection-start-line="13" selection-start-column="137" selection-end-line="13" selection-end-column="137" />
-          <folding>
-            <marker date="1463544561000" expanded="true" signature="187:1220" placeholder="{...}" />
-            <marker date="1463544561000" expanded="true" signature="1303:1306" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/APKeyValuePair.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="15" selection-end-column="27" />
+        <state relative-caret-position="240">
+          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/APKeyValuePair.cpp">
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
-          <folding>
-            <element signature="e#45#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/weather_sources/APOpenWeatherMap.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1545">
-          <caret line="36" column="244" selection-start-line="36" selection-start-column="244" selection-end-line="36" selection-end-column="244" />
+        <state relative-caret-position="270">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/APSimpleSQL.h">
+    <entry file="file://$PROJECT_DIR$/src/APWeatherDataManager.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        <state relative-caret-position="450">
+          <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/APSimpleJSONQuery.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/util/APSimpleSQL.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="146" column="9" selection-start-line="146" selection-start-column="9" selection-end-line="146" selection-end-column="9" />
+        <state relative-caret-position="699">
+          <caret line="165" column="20" selection-start-line="165" selection-start-column="20" selection-end-line="165" selection-end-column="20" />
           <folding>
             <element signature="e#45#69#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include/stdio.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="420" column="5" selection-start-line="420" selection-start-column="5" selection-end-line="420" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/APSimpleSQL.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/weather_sources/APDarkSkyForecastIO.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="2" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
+          <folding>
+            <element signature="e#149#177#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/weather_sources/APOpenWeatherMap.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="191" column="44" selection-start-line="187" selection-start-column="4" selection-end-line="191" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/weather_sources/APDarkSkyForecastIO.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

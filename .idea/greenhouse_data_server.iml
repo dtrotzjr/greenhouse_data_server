@@ -14,10 +14,10 @@
       <sourceFolder url="file://$MODULE_DIR$/src/util/APSimpleJSONQuery.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/APSimpleJSONQuery.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/APException.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APDarkSkyForecastIO.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APWeatherSource.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APDarkSkyForcastIO.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APDarkSkyForecastIO.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APOpenWeatherMap.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APDarkSkyForcastIO.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APOpenWeatherMap.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APWeatherSource.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
