@@ -41,3 +41,4 @@ config.json
 ._.DS_Store
 *.cpp.o
 CXX.includecache
+Makefile

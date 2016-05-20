@@ -1,1 +1,0 @@
-/home/pi/src/greenhouse_data_server/CMakeFiles/greenhouse_data_server.dir
