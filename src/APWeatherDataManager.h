@@ -13,7 +13,7 @@ class APSimpleSQL;
 
 class APWeatherDataManager {
 public:
-    APWeatherDataManager(std::string configPath);
+    APWeatherDataManager(APSimpleSQL *sqlDb, Json::Value config);
     virtual ~APWeatherDataManager();
 
     void GetLatestWeatherData();

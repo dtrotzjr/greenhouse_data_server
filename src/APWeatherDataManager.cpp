@@ -7,34 +7,23 @@
 #include "APDarkSkyForecastIO.h"
 #include "APException.h"
 #include "APSimpleSQL.h"
-#include <fstream>
-#include <json/json.h>
-#include <sstream>
 
-APWeatherDataManager::APWeatherDataManager(std::string configPath) {
-    if (configPath.length() > 0) {
-        std::ifstream jsonFileStream;
-        jsonFileStream.open(configPath);
-        jsonFileStream >> _config;
 
-        char *zErrMsg = 0;
-        int rc;
-        std::string databaseFile = _config["sqlite3_file"].asString();
-        if (databaseFile.length() > 0) {
-            _sqlDb = new APSimpleSQL(databaseFile);
-            _sources = new std::vector<APWeatherSource*>();
-            APOpenWeatherMap* openWeatherMap = new APOpenWeatherMap();
-            openWeatherMap->InitializeSQLTables(_sqlDb);
-            _sources->push_back(openWeatherMap);
-            APDarkSkyForecastIO* forecastIO = new APDarkSkyForecastIO();
-            forecastIO->InitializeSQLTables(_sqlDb);
-            _sources->push_back(forecastIO);
-        } else {
-            throw APException("Missing database file in config file.");
-        }
+APWeatherDataManager::APWeatherDataManager(APSimpleSQL *sqlDb, Json::Value config) {
+    if (_sqlDb && _config != Json::Value::) {
+        _config = config;
+        _sqlDb = sqlDb;
 
+        _sources = new std::vector<APWeatherSource*>();
+        APOpenWeatherMap* openWeatherMap = new APOpenWeatherMap();
+        openWeatherMap->InitializeSQLTables(_sqlDb);
+        _sources->push_back(openWeatherMap);
+
+        APDarkSkyForecastIO* forecastIO = new APDarkSkyForecastIO();
+        forecastIO->InitializeSQLTables(_sqlDb);
+        _sources->push_back(forecastIO);
     } else {
-        throw APException("Missing path to config.json file.");;
+        throw APException("Invalid constructor arguments.");;
     }
 }
 
@@ -51,8 +40,4 @@ void APWeatherDataManager::GetLatestWeatherData() {
         (*it)->UpdateWeatherInfo(_sqlDb, _config);
     }
 }
-
-
-
-
 
