@@ -10,7 +10,7 @@
 
 
 APWeatherDataManager::APWeatherDataManager(Json::Value config) {
-    if (sqlDb && config != Json::Value::null) {
+    if (config != Json::Value::null) {
         _config = config;
         std::string databaseFile = config["sqlite3_file"].asString();
         _sqlDb = new APSimpleSQL(databaseFile);
