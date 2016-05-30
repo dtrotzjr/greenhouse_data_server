@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
                 APSimpleSQL *sqlDb = new APSimpleSQL(databaseFile);
 
                 APWeatherDataManager* wm = new APWeatherDataManager(sqlDb, config);
-                APGreenhouse* gh = new APGreenhouse(sqlDb);
+                APGreenhouse* gh = new APGreenhouse(sqlDb, config);
                 while(true) {
                     try {
                         wm->GetLatestWeatherData();

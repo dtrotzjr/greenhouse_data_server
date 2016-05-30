@@ -1,6 +1,7 @@
 //
 // Created by David Trotz on 5/29/16.
 //
+#include <json/json.h>
 
 #ifndef GREENHOUSE_DATA_SERVER_APGREENHOUSE_H
 #define GREENHOUSE_DATA_SERVER_APGREENHOUSE_H
@@ -9,13 +10,15 @@ class APSimpleSQL;
 
 class APGreenhouse {
 public:
-    APGreenhouse(APSimpleSQL* sql);
+    APGreenhouse(APSimpleSQL* sqlDb, Json::Value& config);
     ~APGreenhouse();
 
-    void UpdateGreenhouseSensorData(APSimpleSQL* db, Json::Value& config);
-    void InitializeSQLTables(APSimpleSQL* db);
+    void UpdateGreenhouseSensorData();
+    void InitializeSQLTables();
 private:
+    APSimpleSQL* _sqlDb;
     APSimpleJSONQuery* _jsonQueryObj;
+    Json::Value _config;
 };
 
 

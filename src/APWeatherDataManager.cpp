@@ -10,7 +10,7 @@
 
 
 APWeatherDataManager::APWeatherDataManager(APSimpleSQL *sqlDb, Json::Value config) {
-    if (_sqlDb && _config != Json::Value::) {
+    if (sqlDb && config != Json::Value::null) {
         _config = config;
         _sqlDb = sqlDb;
 
