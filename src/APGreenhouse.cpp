@@ -7,6 +7,7 @@
 #include "APSimpleSQL.h"
 #include "APSQLException.h"
 #include <sstream>
+#include <string.h>
 #include <json/json.h>
 
 APGreenhouse::APGreenhouse(APSimpleSQL* sqlDb, Json::Value& config) {

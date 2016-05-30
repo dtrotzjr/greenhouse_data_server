@@ -7,6 +7,7 @@
 #define GREENHOUSE_DATA_SERVER_APGREENHOUSE_H
 class APSimpleJSONQuery;
 class APSimpleSQL;
+class APKeyValuePair;
 
 class APGreenhouse {
 public:
