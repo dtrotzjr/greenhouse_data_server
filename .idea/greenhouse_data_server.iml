@@ -2,8 +2,10 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/APGreenhouse.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/APGreenhouse.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/APImageTransferAgent.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/APWeatherDataManager.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/APSQLException.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/APKeyValuePair.cpp" isTestSource="false" />
@@ -15,14 +17,14 @@
       <sourceFolder url="file://$MODULE_DIR$/src/util/APSimpleJSONQuery.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/APSimpleJSONQuery.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/APException.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/APGreenhouse.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/APWeatherDataManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APDarkSkyForecastIO.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APWeatherSource.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APDarkSkyForecastIO.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APOpenWeatherMap.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APOpenWeatherMap.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/weather_sources/APWeatherSource.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/APWeatherDataManager.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/APImageTransferAgent.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
