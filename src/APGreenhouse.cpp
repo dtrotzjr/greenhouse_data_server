@@ -53,7 +53,7 @@ void APGreenhouse::GetLatestSensorData() {
     int maxTimestamp = _getMaxTimestampDataPoint();
     while (maxTimestamp > afterTimestamp) {
         afterTimestamp = maxTimestamp;
-        char *response = _getUpdateFeed(afterTimestamp, 100);
+        char *response = _getUpdateFeed(afterTimestamp, 25);
         if (response != NULL && strlen(response) > 0) {
             _parseJSONResponse(response);
         }
