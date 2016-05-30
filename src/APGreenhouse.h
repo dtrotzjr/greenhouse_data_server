@@ -16,6 +16,10 @@ public:
     void GetLatestSensorData();
     void InitializeSQLTables();
 private:
+    char* _getUpdateFeed(int afterTimestamp, int maxResults);
+    void _parseJSONResponse(char *response);
+    int _getMaxTimestampDataPoint();
+    void _freeVectorAndData(std::vector<APKeyValuePair*>* pairs);
     APSimpleSQL* _sqlDb;
     APSimpleJSONQuery* _jsonQueryObj;
     Json::Value _config;
