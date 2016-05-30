@@ -13,7 +13,7 @@ public:
     APGreenhouse(APSimpleSQL* sqlDb, Json::Value& config);
     ~APGreenhouse();
 
-    void UpdateGreenhouseSensorData();
+    void GetLatestSensorData();
     void InitializeSQLTables();
 private:
     APSimpleSQL* _sqlDb;

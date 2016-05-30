@@ -42,6 +42,6 @@ void APGreenhouse::InitializeSQLTables() {
     }
 }
 
-void APGreenhouse::UpdateGreenhouseSensorData() {
+void APGreenhouse::GetLatestSensorData() {
 
 }

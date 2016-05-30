@@ -24,9 +24,11 @@ int main(int argc, char* argv[])
 
                 APWeatherDataManager* wm = new APWeatherDataManager(sqlDb, config);
                 APGreenhouse* gh = new APGreenhouse(sqlDb, config);
+                gh->InitializeSQLTables();
                 while(true) {
                     try {
                         wm->GetLatestWeatherData();
+                        gh->GetLatestSensorData();
                         sleep(60);
                     } catch (APException& e) {
                         break;
