@@ -46,6 +46,7 @@ void APGreenhouse::InitializeSQLTables() {
 }
 
 void APGreenhouse::GetLatestSensorData() {
+    time_t started_at = time(NULL);
     int afterTimestamp = -1;
     int maxTimestamp = _getMaxTimestampDataPoint();
     while (maxTimestamp > afterTimestamp) {
@@ -55,6 +56,9 @@ void APGreenhouse::GetLatestSensorData() {
             _parseJSONResponse(response);
         }
         maxTimestamp = _getMaxTimestampDataPoint();
+        if (time(NULL) - started_at > 30) {
+            break;
+        }
     }
 }
 
