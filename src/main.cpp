@@ -20,10 +20,8 @@ int main(int argc, char* argv[])
 
             std::string databaseFile = config["sqlite3_file"].asString();
             if (databaseFile.length() > 0) {
-                APSimpleSQL *sqlDb = new APSimpleSQL(databaseFile);
-
-                APWeatherDataManager* wm = new APWeatherDataManager(sqlDb, config);
-                APGreenhouse* gh = new APGreenhouse(sqlDb, config);
+                APWeatherDataManager* wm = new APWeatherDataManager(config);
+                APGreenhouse* gh = new APGreenhouse(config);
                 gh->InitializeSQLTables();
                 while(true) {
                     try {

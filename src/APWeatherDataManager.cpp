@@ -9,10 +9,11 @@
 #include "APSimpleSQL.h"
 
 
-APWeatherDataManager::APWeatherDataManager(APSimpleSQL *sqlDb, Json::Value config) {
+APWeatherDataManager::APWeatherDataManager(Json::Value config) {
     if (sqlDb && config != Json::Value::null) {
         _config = config;
-        _sqlDb = sqlDb;
+        std::string databaseFile = config["sqlite3_file"].asString();
+        _sqlDb = new APSimpleSQL(databaseFile);
 
         _sources = new std::vector<APWeatherSource*>();
         APOpenWeatherMap* openWeatherMap = new APOpenWeatherMap();

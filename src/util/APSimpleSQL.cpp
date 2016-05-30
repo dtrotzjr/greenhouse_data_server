@@ -20,7 +20,9 @@ APSimpleSQL::APSimpleSQL(std::string databaseFile) {
         }
         // Set the database encoding to UTF-8 (we don't care if it fails as this will only succeed the very first time
         // the database is created.
-        rc = sqlite3_exec(_db, "PRAGMA encoding = \"UTF-8\";", NULL, 0, &zErrMsg);
+        sqlite3_exec(_db, "PRAGMA encoding=\"UTF-8\";", NULL, 0, &zErrMsg);
+        sqlite3_exec(_db, "PRAGMA synchronous=FULL;", NULL, 0, &zErrMsg);
+        sqlite3_exec(_db, "PRAGMA journal_mode=WAL;", NULL, 0, &zErrMsg);
     } else {
         throw;
     }

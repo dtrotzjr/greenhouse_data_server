@@ -11,7 +11,7 @@ class APKeyValuePair;
 
 class APGreenhouse {
 public:
-    APGreenhouse(APSimpleSQL* sqlDb, Json::Value& config);
+    APGreenhouse(Json::Value& config);
     ~APGreenhouse();
 
     void GetLatestSensorData();
