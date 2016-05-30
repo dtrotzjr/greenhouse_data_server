@@ -125,7 +125,7 @@ void APGreenhouse::_parseJSONResponse(char *response) {
                             pairs->push_back(pair);
                         }
 
-                        pair = new APKeyValuePair("gh_sensor_data_id", gh_data_point_id);
+                        pair = new APKeyValuePair("gh_data_point_id", gh_data_point_id);
                         pairs->push_back(pair);
 
                         _sqlDb->DoInsert("gh_sensor_data", pairs);
@@ -170,7 +170,7 @@ void APGreenhouse::_parseJSONResponse(char *response) {
                         pairs->push_back(pair);
                     }
 
-                    pair = new APKeyValuePair("gh_sensor_data_id", gh_data_point_id);
+                    pair = new APKeyValuePair("gh_data_point_id", gh_data_point_id);
                     pairs->push_back(pair);
 
                     _sqlDb->DoInsert("gh_system_data", pairs);
@@ -187,7 +187,7 @@ void APGreenhouse::_parseJSONResponse(char *response) {
                         pair = new APKeyValuePair("filename", image_datum["filename"].asString());
                         pairs->push_back(pair);
 
-                        pair = new APKeyValuePair("gh_sensor_data_id", gh_data_point_id);
+                        pair = new APKeyValuePair("gh_data_point_id", gh_data_point_id);
                         pairs->push_back(pair);
 
                         _sqlDb->DoInsert("gh_image_data", pairs);
