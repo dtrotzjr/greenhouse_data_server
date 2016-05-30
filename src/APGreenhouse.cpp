@@ -56,7 +56,7 @@ void APGreenhouse::GetLatestSensorData() {
             _parseJSONResponse(response);
         }
         maxTimestamp = _getMaxTimestampDataPoint();
-        if (time(NULL) - started_at > 30) {
+        if (time(NULL) - started_at > 60) {
             break;
         }
     }

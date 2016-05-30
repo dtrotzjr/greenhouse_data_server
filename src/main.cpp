@@ -27,9 +27,16 @@ int main(int argc, char* argv[])
                 gh->InitializeSQLTables();
                 while(true) {
                     try {
+                        time_t start = time(NULL);
                         wm->GetLatestWeatherData();
                         gh->GetLatestSensorData();
-                        sleep(60);
+                        time_t delta = time(NULL) - start;
+                        int waitFor = 60;
+                        if  (delta > 60)
+                            waitFor = 0;
+                        else
+                            waitFor = 60 - delta;
+                        sleep(waitFor);
                     } catch (APException& e) {
                         fprintf(stderr, "Exception Caught: %s", e.what());
                         break;
