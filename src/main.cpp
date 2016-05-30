@@ -1,5 +1,6 @@
 #include <iostream>
 #include "APWeatherDataManager.h"
+#include "APSimpleSQL.h"
 #include "APGreenhouse.h"
 #include <unistd.h>
 #include <fstream>
@@ -10,7 +11,8 @@
 int main(int argc, char* argv[]) 
 {
     if (argc == 2) {
-        if (configPath.length() > 0) {
+        std::string configPath = argv[1];
+	if (configPath.length() > 0) {
             Json::Value config;
             std::ifstream jsonFileStream;
             jsonFileStream.open(configPath);

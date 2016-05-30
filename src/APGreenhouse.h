@@ -5,10 +5,11 @@
 #ifndef GREENHOUSE_DATA_SERVER_APGREENHOUSE_H
 #define GREENHOUSE_DATA_SERVER_APGREENHOUSE_H
 class APSimpleJSONQuery;
+class APSimpleSQL;
 
 class APGreenhouse {
 public:
-    APGreenhouse();
+    APGreenhouse(APSimpleSQL* sql);
     ~APGreenhouse();
 
     void UpdateGreenhouseSensorData(APSimpleSQL* db, Json::Value& config);
