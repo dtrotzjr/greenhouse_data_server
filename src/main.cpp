@@ -31,6 +31,7 @@ int main(int argc, char* argv[])
                         gh->GetLatestSensorData();
                         sleep(60);
                     } catch (APException& e) {
+                        fprintf(stderr, "Exception Caught: %s", e.what());
                         break;
                     }
                 }
