@@ -81,11 +81,12 @@ void APGreenhouse::_parseJSONResponse(char *response) {
     Json::Value root;
     s >> root;
 
-    std::vector<APKeyValuePair*> *pairs = new std::vector<APKeyValuePair*>();
+    std::vector<APKeyValuePair*> *pairs = NULL;
     APKeyValuePair* pair;
     int64_t gh_data_point_id;
 
     for (const Json::Value& json : root["data_points"]) {
+        pairs = new std::vector<APKeyValuePair*>();
         // Timestamp
         if (json["id"] != Json::Value::null && json["timestamp"] != Json::Value::null) {
             gh_data_point_id = (int64_t)json["id"].asInt64();
@@ -123,6 +124,10 @@ void APGreenhouse::_parseJSONResponse(char *response) {
                             pair = new APKeyValuePair("humidity", sensor_datum["humidity"].asDouble());
                             pairs->push_back(pair);
                         }
+
+                        pair = new APKeyValuePair("gh_sensor_data_id", gh_data_point_id);
+                        pairs->push_back(pair);
+
                         _sqlDb->DoInsert("gh_sensor_data", pairs);
                         _freeVectorAndData(pairs);
                     }
@@ -165,6 +170,9 @@ void APGreenhouse::_parseJSONResponse(char *response) {
                         pairs->push_back(pair);
                     }
 
+                    pair = new APKeyValuePair("gh_sensor_data_id", gh_data_point_id);
+                    pairs->push_back(pair);
+
                     _sqlDb->DoInsert("gh_system_data", pairs);
                     _freeVectorAndData(pairs);
                 }
@@ -177,6 +185,9 @@ void APGreenhouse::_parseJSONResponse(char *response) {
                         pair = new APKeyValuePair("id", image_datum["id"].asInt64());
                         pairs->push_back(pair);
                         pair = new APKeyValuePair("filename", image_datum["filename"].asString());
+                        pairs->push_back(pair);
+
+                        pair = new APKeyValuePair("gh_sensor_data_id", gh_data_point_id);
                         pairs->push_back(pair);
 
                         _sqlDb->DoInsert("gh_image_data", pairs);
