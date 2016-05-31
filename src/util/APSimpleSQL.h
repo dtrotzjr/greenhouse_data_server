@@ -24,6 +24,7 @@ public:
     void DoSQL(const char* sql);
     int64_t DoInsert(const char* sql);
     int64_t DoInsert(const char* tableName, std::vector<APKeyValuePair*>* pairs);
+    int64_t DoUpdate(const char* tableName, std::vector<APKeyValuePair*>* pairs, char* where);
 
     bool RowExists(const char* table_name, int64_t rowid);
 

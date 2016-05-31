@@ -11,6 +11,7 @@
 #include <string>
 
 APSimpleSQL::APSimpleSQL(std::string databaseFile) {
+    _transactionDepth = 0;
     if (databaseFile.length() > 0) {
         char* zErrMsg = NULL;
         int rc = sqlite3_open(databaseFile.c_str(), &_db);
@@ -35,15 +36,17 @@ APSimpleSQL::~APSimpleSQL() {
 
 void APSimpleSQL::BeginTransaction() {
     if (_transactionDepth == 0) {
+//        printf("BEGIN\n");
         DoSQL("BEGIN TRANSACTION");
     }
-    _transactionDepth--;
+    _transactionDepth++;
 }
 
 void APSimpleSQL::EndTransaction() {
     try {
         _transactionDepth--;
         if (_transactionDepth == 0) {
+//            printf("COMMIT\n");
             DoSQL("COMMIT TRANSACTION");
         }
     } catch (APSQLException& e) {
@@ -55,9 +58,8 @@ void APSimpleSQL::EndTransaction() {
 void APSimpleSQL::RollbackTransaction() {
     try {
         _transactionDepth--;
-        if (_transactionDepth == 0) {
-            DoSQL("ROLLBACK TRANSACTION");
-        }
+//        printf("ROLLBACK\n");
+        DoSQL("ROLLBACK TRANSACTION");
     } catch (APSQLException& e) {
         _transactionDepth++; // We didn't actually change the commit level so we revert.
         throw e;
@@ -186,4 +188,26 @@ bool APSimpleSQL::RowExists(const char* table_name, int64_t rowid) {
     }
     sqlite3_finalize(stmt);
     return exists;
+}
+
+int64_t APSimpleSQL::DoUpdate(const char* tableName, std::vector<APKeyValuePair*>* pairs, char* where) {
+    int buffLen = 32768;
+    char buff[buffLen];
+    snprintf(buff, buffLen, "UPDATE %s SET ", tableName);
+    for (std::vector<APKeyValuePair*>::iterator it = pairs->begin() ; it != pairs->end(); ++it) {
+        if (it != pairs->begin()) {
+            strncat(buff, ",", buffLen);
+        }
+        strncat(buff, (*it)->GetKey().c_str(), buffLen);
+        strncat(buff, "=", buffLen);
+        strncat(buff, (*it)->GetValue().c_str(), buffLen);
+    }
+    strncat(buff, " WHERE ", buffLen);
+    strncat(buff, where, buffLen);
+    strncat(buff, ";", buffLen);
+    printf("\n%s\n", buff);
+    int total_before = sqlite3_total_changes(_db);
+    DoSQL(buff);
+    int total_after = sqlite3_total_changes(_db);
+    return (int64_t)(total_after - total_before);
 }

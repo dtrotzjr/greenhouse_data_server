@@ -32,26 +32,27 @@ APImageTransferAgent::APImageTransferAgent(Json::Value config) {
 }
 
 APImageTransferAgent::~APImageTransferAgent() {
-
+    delete _sqlDb;
 }
 
 void APImageTransferAgent::Run() {
     _running = true;
-    bool failed = false;
-    while(!failed) {
-        failed = _step();
-        break;
+    bool done = false;
+    while(!done) {
+        done = _step();
     }
     _running = false;
 }
 
 bool APImageTransferAgent::_step() {
+    bool done = false;
     if (_sqlDb != NULL) {
         // Get the next oldest image that has not been synchronized
-        _sqlDb->BeginSelect("SELECT gh_image_data.id,gh_image_data.filename,MIN(gh_data_points.timestamp) as timestamp FROM gh_image_data JOIN gh_data_points ON gh_image_data.gh_data_point_id = gh_data_points.id WHERE gh_data_points.synchronized == 0");
+        _sqlDb->BeginSelect("SELECT gh_image_data.id,gh_image_data.filename,MIN(gh_data_points.timestamp) as timestamp,gh_data_points.id as gh_data_points_id FROM gh_image_data JOIN gh_data_points ON gh_image_data.gh_data_point_id = gh_data_points.id WHERE gh_data_points.synchronized == 0");
         if (_sqlDb->StepSelect()) {
             int64_t rowid = _sqlDb->GetColAsInt64(0);
             std::string fullPathname = std::string((const char*)_sqlDb->GetColAsString(1));
+            int64_t data_points_id = _sqlDb->GetColAsInt64(3);
 
             std::set<char> delims{'/'};
             std::vector<std::string> pathParts = _splitpath(fullPathname, delims);
@@ -79,17 +80,33 @@ bool APImageTransferAgent::_step() {
             }
 
             if (fullDestFilename != NULL) {
-                _sftp_image(fullPathname.c_str(), std::string(fullDestFilename));
+                if(_sftp_image(fullPathname.c_str(), std::string(fullDestFilename)) == 0) {
+                    std::vector<APKeyValuePair*> *pairs = new std::vector<APKeyValuePair*>();
+                    APKeyValuePair* pair = new APKeyValuePair("synchronized", (int64_t)1);
+                    pairs->push_back(pair);
+                    int whereLen = 256;
+                    char where[whereLen];
+                    snprintf(where, whereLen, "id = %lld", data_points_id);
+                    _sqlDb->BeginTransaction();
+                    int updatedRows = _sqlDb->DoUpdate("gh_data_points", pairs, where);
+                    _sqlDb->EndTransaction();
+                    if(updatedRows == 1) {
+                        fprintf(stdout, "Copied file and updated database successfully.");
+                    } else {
+                        fprintf(stderr, "Updated gh_data_points row count mismatch. Wanted 1 got %d", updatedRows);
+                        done = true;
+                    }
+                }
             } else {
-                fprintf(stderr, "ERROR: Neither 'images_destination' nor 'images_destination_fallback' appear to be accessible.");
-                return false;
+                fprintf(stderr, "ERROR: Neither 'images_destination' nor 'images_destination_fallback' appear to be accessible.\n");
+                done = true;
             }
 
 
         }
         _sqlDb->EndSelect();
     }
-
+    return done;
 }
 
 bool APImageTransferAgent::_directoryExists(std::string path) {
@@ -98,12 +115,8 @@ bool APImageTransferAgent::_directoryExists(std::string path) {
     if (path[path.length() - 1] != '/') {
         path += "/";
     }
-    printf("Testing: %s", path.c_str());
-    if(0 != access(path.c_str(), F_OK)) {
-        printf("Got here.");
-        if (ENOENT != errno && ENOTDIR != errno) {
-            exists = true;
-        }
+    if(0 == access(path.c_str(), F_OK)) {
+        exists = true;
     }
     return exists;
 }
@@ -136,7 +149,7 @@ std::vector<std::string> APImageTransferAgent::_splitpath(const std::string& str
 }
 
 bool APImageTransferAgent::IsRunning() {
-
+    return _running;
 }
 
 int APImageTransferAgent::_sftp_image(std::string remote_filename, std::string local_filename) {
@@ -178,14 +191,14 @@ int APImageTransferAgent::_sftp_image(std::string remote_filename, std::string l
 
 
         remote_file_in = sftp_open(sftp,remote_filename.c_str(),O_RDONLY, 0);
-        if (remote_file_in != NULL) {
+        if (remote_file_in == NULL) {
             fprintf(stderr, "Error opening %s: %s\n", remote_filename.c_str(), ssh_get_error(session));
             return SSH_ERROR;
         }
         /* open a file for writing... */
 
         local_file_out=fopen(local_filename.c_str(),"w");
-        if (local_file_out != NULL) {
+        if (local_file_out == NULL) {
             fprintf(stderr, "Error opening destination file for writing\n");
             return SSH_ERROR;
         }
