@@ -7,6 +7,7 @@
 #include <json/json.h>
 #include <sstream>
 #include "APException.h"
+#include "APImageTransferAgent.h"
 
 int main(int argc, char* argv[]) 
 {
@@ -20,26 +21,28 @@ int main(int argc, char* argv[])
 
             std::string databaseFile = config["sqlite3_file"].asString();
             if (databaseFile.length() > 0) {
-                APWeatherDataManager* wm = new APWeatherDataManager(config);
-                APGreenhouse* gh = new APGreenhouse(config);
-                gh->InitializeSQLTables();
-                while(true) {
-                    try {
-                        time_t start = time(NULL);
-                        wm->GetLatestWeatherData();
-                        gh->GetLatestSensorData();
-                        time_t delta = time(NULL) - start;
-                        int waitFor = 60;
-                        if  (delta > 60)
-                            waitFor = 0;
-                        else
-                            waitFor = 60 - delta;
-                        sleep(waitFor);
-                    } catch (APException& e) {
-                        fprintf(stderr, "Exception Caught: %s", e.what());
-                        break;
-                    }
-                }
+                APImageTransferAgent* ita = new APImageTransferAgent(config);
+                ita->Run();
+//                APWeatherDataManager* wm = new APWeatherDataManager(config);
+//                APGreenhouse* gh = new APGreenhouse(config);
+//                gh->InitializeSQLTables();
+//                while(true) {
+//                    try {
+//                        time_t start = time(NULL);
+//                        wm->GetLatestWeatherData();
+//                        gh->GetLatestSensorData();
+//                        time_t delta = time(NULL) - start;
+//                        int waitFor = 60;
+//                        if  (delta > 60)
+//                            waitFor = 0;
+//                        else
+//                            waitFor = 60 - delta;
+//                        sleep(waitFor);
+//                    } catch (APException& e) {
+//                        fprintf(stderr, "Exception Caught: %s", e.what());
+//                        break;
+//                    }
+//                }
             }
         }
     }
