@@ -37,8 +37,8 @@ public:
 private:
     sqlite3 *_db;
     sqlite3_stmt *_select_stmt;
-    std::string stmt_string;
     int _transactionDepth;
+    std::string _selectStmtString;
 };
 
 

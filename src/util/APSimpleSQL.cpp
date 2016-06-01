@@ -10,6 +10,27 @@
 #include <string.h>
 #include <string>
 
+//#define DEBUG_SQL_TRANSACTIONS
+#ifdef DEBUG_SQL_TRANSACTIONS
+#define PRINT_SQL_TRANSACTION(...) printf(__VA_ARGS__)
+#else
+#define PRINT_SQL_TRANSACTION(...)
+#endif
+
+//#define DEBUG_SQL
+#ifdef DEBUG_SQL
+#define PRINT_SQL(...) printf(__VA_ARGS__)
+#else
+#define PRINT_SQL(...)
+#endif
+
+//#define DEBUG_SQL_STEPS
+#ifdef DEBUG_SQL_STEPS
+#define PRINT_SQL_STEP(...) printf(__VA_ARGS__)
+#else
+#define PRINT_SQL_STEP(...)
+#endif
+
 APSimpleSQL::APSimpleSQL(std::string databaseFile) {
     _transactionDepth = 0;
     if (databaseFile.length() > 0) {
@@ -24,6 +45,7 @@ APSimpleSQL::APSimpleSQL(std::string databaseFile) {
         sqlite3_exec(_db, "PRAGMA encoding=\"UTF-8\";", NULL, 0, &zErrMsg);
         sqlite3_exec(_db, "PRAGMA synchronous=FULL;", NULL, 0, &zErrMsg);
         sqlite3_exec(_db, "PRAGMA journal_mode=WAL;", NULL, 0, &zErrMsg);
+        sqlite3_exec(_db, "PRAGMA busy_timeout=30000;", NULL, 0, &zErrMsg);
     } else {
         throw;
     }
@@ -36,7 +58,7 @@ APSimpleSQL::~APSimpleSQL() {
 
 void APSimpleSQL::BeginTransaction() {
     if (_transactionDepth == 0) {
-//        printf("BEGIN\n");
+        PRINT_SQL_TRANSACTION("BEGIN\n");
         DoSQL("BEGIN TRANSACTION");
     }
     _transactionDepth++;
@@ -46,7 +68,7 @@ void APSimpleSQL::EndTransaction() {
     try {
         _transactionDepth--;
         if (_transactionDepth == 0) {
-//            printf("COMMIT\n");
+            PRINT_SQL_TRANSACTION("COMMIT\n");
             DoSQL("COMMIT TRANSACTION");
         }
     } catch (APSQLException& e) {
@@ -58,7 +80,7 @@ void APSimpleSQL::EndTransaction() {
 void APSimpleSQL::RollbackTransaction() {
     try {
         _transactionDepth--;
-//        printf("ROLLBACK\n");
+        PRINT_SQL_TRANSACTION("ROLLBACK\n");
         DoSQL("ROLLBACK TRANSACTION");
     } catch (APSQLException& e) {
         _transactionDepth++; // We didn't actually change the commit level so we revert.
@@ -67,6 +89,7 @@ void APSimpleSQL::RollbackTransaction() {
 }
 
 void APSimpleSQL::DoSQL(const char* sql) {
+    PRINT_SQL("SQL: %s\n", sql);
     sqlite3_stmt* stmt;
     sqlite3_prepare_v2(_db, sql, -1, &stmt, NULL);
     int rc = sqlite3_step(stmt);                                                                    /* 3 */
@@ -76,17 +99,23 @@ void APSimpleSQL::DoSQL(const char* sql) {
         sprintf(buff,"ERROR stepping statement (%s): %s\n", sql, sqlite3_errmsg(_db));
         throw APSQLException(std::string(buff));
     }
+    PRINT_SQL("DONE SQL: %s\n", sql);
 }
 
 void APSimpleSQL::BeginSelect(const char* sql) {
+    _selectStmtString = std::string(sql);
+    PRINT_SQL_STEP("Begin Select: %s\n", _selectStmtString.c_str());
     sqlite3_prepare_v2(_db, sql, -1, &_select_stmt, NULL);
 }
 
 void APSimpleSQL::EndSelect() {
+    PRINT_SQL_STEP("End Select: %s\n", _selectStmtString.c_str());
+    _selectStmtString = "";
     sqlite3_finalize(_select_stmt);
 }
 
 bool APSimpleSQL::StepSelect() {
+    PRINT_SQL_STEP("Step Select: %s\n", _selectStmtString.c_str());
     bool step_result;
     if (_select_stmt != NULL) {
         int rc = sqlite3_step(_select_stmt);                                                                    /* 3 */
