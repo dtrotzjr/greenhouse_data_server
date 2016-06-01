@@ -54,11 +54,15 @@ bool APImageTransferAgent::_step() {
         _sqlDb->BeginSelect("SELECT gh_image_data.id,gh_image_data.filename,MIN(gh_data_points.timestamp) as timestamp,gh_data_points.id as gh_data_points_id FROM gh_image_data JOIN gh_data_points ON gh_image_data.gh_data_point_id = gh_data_points.id WHERE gh_data_points.synchronized == 0");
         if (_sqlDb->StepSelect()) {
             rowid = _sqlDb->GetColAsInt64(0);
-            fullPathname = std::string((const char *) _sqlDb->GetColAsString(1));
+            const char *path = (const char *)_sqlDb->GetColAsString(1);
+            if(path == NULL) {
+                path = "";
+            }
+            fullPathname = std::string(path);
             data_points_id = _sqlDb->GetColAsInt64(3);
         }
         _sqlDb->EndSelect();
-        if (rowid != -1) {
+        if (rowid != -1 && fullPathname.length() > 0) {
             std::set<char> delims{'/'};
             std::vector<std::string> pathParts = _splitpath(fullPathname, delims);
             std::string destinationPathname;
@@ -106,6 +110,8 @@ bool APImageTransferAgent::_step() {
                 fprintf(stderr, "ERROR: Neither 'images_destination' nor 'images_destination_fallback' appear to be accessible.\n");
                 done = true;
             }
+        } else {
+            sleep(500);
         }
     }
     return done;
