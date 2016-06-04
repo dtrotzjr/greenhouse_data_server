@@ -38,8 +38,13 @@ APImageTransferAgent::~APImageTransferAgent() {
 void APImageTransferAgent::Run() {
     _running = true;
     bool done = false;
-    while(!done) {
-        done = _step();
+    try {
+        while(!done) {
+            done = _step();
+        }
+    } catch(std::exception& e) {
+        _running = false;
+        throw e;
     }
     _running = false;
 }
@@ -99,9 +104,7 @@ bool APImageTransferAgent::_step() {
                     _sqlDb->BeginTransaction();
                     int updatedRows = _sqlDb->DoUpdate("gh_data_points", pairs, where);
                     _sqlDb->EndTransaction();
-                    if(updatedRows == 1) {
-                        fprintf(stdout, "Copied file and updated database successfully.");
-                    } else {
+                    if(updatedRows != 1) {
                         fprintf(stderr, "Updated gh_data_points row count mismatch. Wanted 1 got %d", updatedRows);
                         done = true;
                     }

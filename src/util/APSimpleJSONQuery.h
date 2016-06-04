@@ -9,13 +9,14 @@
 typedef struct JSONResponseStruct {
     char *buffer;
     size_t size;
+    bool success;
 } JSONResponseStructType;
 
 class APSimpleJSONQuery {
 public:
     APSimpleJSONQuery();
     virtual ~APSimpleJSONQuery();
-    char* GetJSONResponseFromURL(const char* url);
+    JSONResponseStructType GetJSONResponseFromURL(const char* url);
 
 private:
     JSONResponseStructType _curlResponseChunk;

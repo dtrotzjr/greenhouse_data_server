@@ -51,17 +51,46 @@ void APGreenhouse::GetLatestSensorData() {
     time_t started_at = time(NULL);
     int afterTimestamp = -1;
     int maxTimestamp = _getMaxTimestampDataPoint();
+    int beginCount = _getCurrentDataPointCount();
+    const char* messagePrefix = "| Getting greenhouse and local sensor data:";
+    fprintf(stdout, messagePrefix);
     while (maxTimestamp > afterTimestamp) {
         afterTimestamp = maxTimestamp;
         char *response = _getUpdateFeed(afterTimestamp, 25);
         if (response != NULL && strlen(response) > 0) {
             _parseJSONResponse(response);
+        } else {
+            break;
         }
+
         maxTimestamp = _getMaxTimestampDataPoint();
         if (time(NULL) - started_at > 60) {
+            // We are taking too long to fetch so we will break and let others have some time.
             break;
         }
     }
+    // Let's print some useful statistics about what just happened.
+    int endCount = _getCurrentDataPointCount();
+    int delta = endCount - beginCount;
+    int buffLen = 128;
+    char *messagePostfix = (char*)calloc(buffLen, sizeof(char));
+    char *message = (char*)calloc(buffLen, sizeof(char));
+    char *spaces = (char*)calloc(buffLen, sizeof(char));
+
+    if (delta == 1) {
+        strncpy(messagePostfix, "[1 DATA POINT FETCHED] |\n", buffLen);
+    } else if (delta > 1) {
+        snprintf(messagePostfix, buffLen, "[%d DATA POINTS FETCHED] |\n", delta);
+    } else {
+        strncpy(messagePostfix, "[NO DATA AVAILABLE] |\n", buffLen);
+    }
+
+    int totalSpaces = 81 - (strlen(messagePrefix) + strlen(messagePostfix));
+    for (int i = 0; i < totalSpaces; ++i) {
+        strcat(spaces, " ");
+    }
+    fprintf(stdout, "%s%s", spaces, messagePostfix);
+
 }
 
 int APGreenhouse::_getMaxTimestampDataPoint() {
@@ -74,10 +103,21 @@ int APGreenhouse::_getMaxTimestampDataPoint() {
     return maxTimestampDataPoint;
 }
 
+int APGreenhouse::_getCurrentDataPointCount() {
+    int count = 0;
+    _sqlDb->BeginSelect("SELECT COUNT(id) FROM gh_data_points");
+    if (_sqlDb->StepSelect()) {
+        count = _sqlDb->GetColAsInt64(0);
+    }
+    _sqlDb->EndSelect();
+    return count;
+}
+
 char* APGreenhouse::_getUpdateFeed(int afterTimestamp, int maxResults) {
     char url[2048];
     snprintf(url, sizeof(url), "http://192.168.0.190/data_points.json?after_timestamp=%d&limit=%d", afterTimestamp, maxResults);
-    return _jsonQueryObj->GetJSONResponseFromURL(url);
+    JSONResponseStructType response = _jsonQueryObj->GetJSONResponseFromURL(url);
+    return (response.size > 0 && response.success) ? response.buffer : NULL;
 }
 
 void APGreenhouse::_parseJSONResponse(char *response) {

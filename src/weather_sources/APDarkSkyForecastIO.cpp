@@ -6,6 +6,7 @@
 #include "APSimpleJSONQuery.h"
 #include "APSimpleSQL.h"
 #include "APSQLException.h"
+#include <string.h>
 #include <sstream>
 
 void APDarkSkyForecastIO::InitializeSQLTables(APSimpleSQL* db) {
@@ -63,19 +64,21 @@ void APDarkSkyForecastIO::InitializeSQLTables(APSimpleSQL* db) {
 
 void APDarkSkyForecastIO::UpdateWeatherInfo(APSimpleSQL* db, Json::Value& config) {
     if (db != NULL) {
-        printf("Getting Forecast.io weather conditions...\n");
+        fprintf(stdout, "| Getting Forecast.io weather conditions:");
         char *response = _getJSONFromForecastIOService(config);
-        printf("Parsing Forecast.io weather conditions...\n");
-        if (response != NULL) {
+        if (response != NULL && strlen(response) > 0) {
             _parseJSONResponse(response, db, true);
+            fprintf(stdout, "                                 [OK] |\n");
+        } else {
+            fprintf(stdout, "                             [FAILED] |\n");
+            fprintf(stderr, "Failed to get a response from Forecast.io\n");
         }
-        printf("DONE: Forecast.io weather conditions...\n");
 
     }
 }
 
 char* APDarkSkyForecastIO::_getJSONFromForecastIOService(Json::Value &config) {
-    char* response = NULL;
+    char* responseBuff = NULL;
     std::string lat = config["latitude"].asString();
     std::string lon = config["longitude"].asString();
     std::string apikey = config["forcast_io_api_key"].asString();
@@ -83,9 +86,11 @@ char* APDarkSkyForecastIO::_getJSONFromForecastIOService(Json::Value &config) {
         char url[2048];
         snprintf(url, sizeof(url), "https://api.forecast.io/forecast/%s/%s,%s", apikey.c_str(), lat.c_str(), lon.c_str());
 
-        response = _jsonQueryObj->GetJSONResponseFromURL(url);
+        JSONResponseStructType response = _jsonQueryObj->GetJSONResponseFromURL(url);
+        if (response.size > 0 && response.success)
+            responseBuff = response.buffer;
     }
-    return response;
+    return responseBuff;
 }
 
 void APDarkSkyForecastIO::_parseJSONResponse(char *response, APSimpleSQL *db, bool live_condition) {

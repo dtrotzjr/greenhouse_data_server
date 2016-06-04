@@ -234,7 +234,7 @@ int64_t APSimpleSQL::DoUpdate(const char* tableName, std::vector<APKeyValuePair*
     strncat(buff, " WHERE ", buffLen);
     strncat(buff, where, buffLen);
     strncat(buff, ";", buffLen);
-    printf("\n%s\n", buff);
+    PRINT_SQL("\n%s\n", buff);
     int total_before = sqlite3_total_changes(_db);
     DoSQL(buff);
     int total_after = sqlite3_total_changes(_db);

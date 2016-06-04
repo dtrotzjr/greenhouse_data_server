@@ -8,6 +8,7 @@
 #include "APException.h"
 #include "APSQLException.h"
 #include <string>
+#include <string.h>
 #include <sstream>
 #include <vector>
 #include <time.h>
@@ -22,6 +23,7 @@ APOpenWeatherMap::~APOpenWeatherMap() {
 }
 
 void APOpenWeatherMap::InitializeSQLTables(APSimpleSQL* db) {
+    _printedSkippingForcastMessage = false;
     // Create the needed tables
     if (db != NULL) {
         db->BeginTransaction();
@@ -50,10 +52,14 @@ void APOpenWeatherMap::InitializeSQLTables(APSimpleSQL* db) {
 
 void APOpenWeatherMap::UpdateWeatherInfo(APSimpleSQL* db, Json::Value& config) {
     if (db != NULL) {
-        printf("Getting open weather map current conditions...\n");
+        printf("| Getting open weather map current conditions:");
         char* response = _getCurrentConditions(config);
-        if (response != NULL) {
+        if (response != NULL && strlen(response) > 0) {
             _parseJSONResponse(response, db, true);
+            fprintf(stdout, "                            [OK] |\n");
+        } else {
+            fprintf(stdout, "                        [FAILED] |\n");
+            fprintf(stderr, "Failed to get a response from open weather map's current conditions api\n");
         }
 
         time_t now = time(NULL);
@@ -62,13 +68,20 @@ void APOpenWeatherMap::UpdateWeatherInfo(APSimpleSQL* db, Json::Value& config) {
         snprintf(buff, 4096,"SELECT id FROM owm_detail WHERE days_since_epoch = %d AND live_condition = 0 LIMIT 1", daysSinceEpoch);
         db->BeginSelect(buff);
         if (!db->StepSelect()) {
-            printf("Getting open weather map forecast...\n");
+            fprintf(stdout, "| Getting open weather map forecast:");
             response = _getForecast(config);
-            if (response != NULL) {
+            if (response != NULL && strlen(response) > 0 ) {
                 _parseJSONResponse(response, db, false);
+                fprintf(stdout, "                                      [OK] |\n");
+            } else {
+                fprintf(stdout, "                                  [FAILED] |\n");
+                fprintf(stderr, "Failed to get a response from open weather map's forecast api\n");
             }
         } else {
-            printf("Skipping open weather map forecast since we already have it for today...\n");
+            if (!_printedSkippingForcastMessage) {
+                fprintf(stderr, "WARNING: Skipping forecast: a forecast already exists for today...\n");
+                _printedSkippingForcastMessage = true;
+            }
         }
         db->EndSelect();
 
@@ -78,7 +91,7 @@ void APOpenWeatherMap::UpdateWeatherInfo(APSimpleSQL* db, Json::Value& config) {
 }
 
 char* APOpenWeatherMap::_getForecast(Json::Value& config) {
-    char* response = NULL;
+    char* responseBuff = NULL;
     std::string lat = config["latitude"].asString();
     std::string lon = config["longitude"].asString();
     std::string apikey = config["open_weather_map_apikey"].asString();
@@ -86,13 +99,15 @@ char* APOpenWeatherMap::_getForecast(Json::Value& config) {
         char url[2048];
         snprintf(url, sizeof(url), "http://api.openweathermap.org/data/2.5/forecast?lat=%s&lon=%s&appid=%s", lat.c_str(), lon.c_str(), apikey.c_str());
 
-        response = _jsonQueryObj->GetJSONResponseFromURL(url);
+        JSONResponseStructType response = _jsonQueryObj->GetJSONResponseFromURL(url);
+        if (response.size > 0 && response.success)
+            responseBuff = response.buffer;
     }
-    return response;
+    return responseBuff;
 }
 
 char* APOpenWeatherMap::_getCurrentConditions(Json::Value& config) {
-    char* response = NULL;
+    char* responseBuff = NULL;
     std::string lat = config["latitude"].asString();
     std::string lon = config["longitude"].asString();
     std::string apikey = config["open_weather_map_apikey"].asString();
@@ -100,9 +115,11 @@ char* APOpenWeatherMap::_getCurrentConditions(Json::Value& config) {
         char url[2048];
         snprintf(url, sizeof(url), "http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s", lat.c_str(), lon.c_str(), apikey.c_str());
 
-        response = _jsonQueryObj->GetJSONResponseFromURL(url);
+        JSONResponseStructType response = _jsonQueryObj->GetJSONResponseFromURL(url);
+        if (response.size > 0 && response.success)
+            responseBuff = response.buffer;
     }
-    return response;
+    return responseBuff;
 }
 
 void APOpenWeatherMap::_parseJSONResponse(char *response, APSimpleSQL *db, bool live_condition) {
@@ -238,7 +255,7 @@ void APOpenWeatherMap::_parseWeatherInfo(Json::Value& json, APSimpleSQL *db, boo
             }
         }
     } else {
-        fprintf(stdout, "Skipping owm_detail %lld since we have already seen this timestamp's details\n", dt);
+        fprintf(stderr, "WARNING: Skipping owm_detail %lld since we have already seen this timestamp's details\n", dt);
     }
     db->EndSelect();
 }

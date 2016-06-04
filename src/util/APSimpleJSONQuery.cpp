@@ -19,7 +19,7 @@ APSimpleJSONQuery::~APSimpleJSONQuery()  {
     free(_curlResponseChunk.buffer);
 }
 
-char* APSimpleJSONQuery::GetJSONResponseFromURL(const char* url) {
+JSONResponseStructType APSimpleJSONQuery::GetJSONResponseFromURL(const char* url) {
     CURL *curl;
     CURLcode res;
     if(_curlResponseChunk.buffer != NULL) {
@@ -27,23 +27,24 @@ char* APSimpleJSONQuery::GetJSONResponseFromURL(const char* url) {
     }
     _curlResponseChunk.buffer = (char*)malloc(1);  /* will be grown as needed by the realloc above */
     _curlResponseChunk.size = 0;    /* no data at this point */
+    _curlResponseChunk.success = false;
 
     curl = curl_easy_init();
 
     if (curl != NULL) {
-        fprintf(stdout, "Trying: %s\n", url);
         curl_easy_setopt(curl, CURLOPT_URL, url);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, _writeMemoryCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&_curlResponseChunk);
 
         res = curl_easy_perform(curl);
-        if (res != CURLE_OK) {
+        if (res == CURLE_OK) {
+            _curlResponseChunk.success = true;
+        } else {
             fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
         }
         curl_easy_cleanup(curl);
     }
-//    printf("\n+++++\n%s\n+++++\n", _curlResponseChunk.buffer);
-    return _curlResponseChunk.buffer;
+    return _curlResponseChunk;
 }
 
 static size_t

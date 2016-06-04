@@ -20,6 +20,7 @@ private:
     char* _getUpdateFeed(int afterTimestamp, int maxResults);
     void _parseJSONResponse(char *response);
     int _getMaxTimestampDataPoint();
+    int _getCurrentDataPointCount();
     void _freeVectorAndData(std::vector<APKeyValuePair*>* pairs);
     APSimpleSQL* _sqlDb;
     APSimpleJSONQuery* _jsonQueryObj;
