@@ -42,3 +42,5 @@ config.json
 *.cpp.o
 CXX.includecache
 Makefile
+/cmake-build-debug
+/.idea/workspace.xml
