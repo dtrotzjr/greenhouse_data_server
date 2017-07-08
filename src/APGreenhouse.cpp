@@ -50,7 +50,7 @@ void APGreenhouse::InitializeSQLTables() {
 void APGreenhouse::GetLatestSensorData() {
     time_t started_at = time(NULL);
     int afterTimestamp = -1;
-    const time_t maxTimestamp = (const time_t)_getMaxTimestampDataPoint();
+    time_t maxTimestamp = _getMaxTimestampDataPoint();
     int beginCount = _getCurrentDataPointCount();
     const char* messagePrefix = "| Getting greenhouse and local sensor data since [%s]:";
 
@@ -104,11 +104,11 @@ void APGreenhouse::GetLatestSensorData() {
 
 }
 
-int APGreenhouse::_getMaxTimestampDataPoint() {
-    int maxTimestampDataPoint = 0;
+time_t APGreenhouse::_getMaxTimestampDataPoint() {
+    time_t maxTimestampDataPoint = 0;
     _sqlDb->BeginSelect("SELECT MAX(timestamp) FROM gh_data_points");
     if (_sqlDb->StepSelect()) {
-        maxTimestampDataPoint = _sqlDb->GetColAsInt64(0);
+        maxTimestampDataPoint = (time_t)_sqlDb->GetColAsInt64(0);
     }
     _sqlDb->EndSelect();
     return maxTimestampDataPoint;
