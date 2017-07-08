@@ -50,10 +50,21 @@ void APGreenhouse::InitializeSQLTables() {
 void APGreenhouse::GetLatestSensorData() {
     time_t started_at = time(NULL);
     int afterTimestamp = -1;
-    int maxTimestamp = _getMaxTimestampDataPoint();
+    const time_t maxTimestamp = (const time_t)_getMaxTimestampDataPoint();
     int beginCount = _getCurrentDataPointCount();
-    const char* messagePrefix = "| Getting greenhouse and local sensor data:";
-    fprintf(stdout, messagePrefix);
+    const char* messagePrefix = "| Getting greenhouse and local sensor data since [%s]:";
+
+    // Convert the timestamp into a readable format
+    struct tm localMaxTimestamp;
+    char readableTime[64];
+    (void) localtime_r(&maxTimestamp, &localMaxTimestamp);
+
+    if (strftime(readableTime, sizeof(readableTime), "%D %R", &localMaxTimestamp) == 0) {
+        (void) fprintf(stderr,  "ERROR: timestamp conversion failed!\n");
+        strncpy(readableTime, "UNKNOWN", sizeof(readableTime));
+    }
+
+    fprintf(stdout, messagePrefix, readableTime);
     while (maxTimestamp > afterTimestamp) {
         afterTimestamp = maxTimestamp;
         char *response = _getUpdateFeed(afterTimestamp, 25);
