@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
             std::string databaseFile = config["sqlite3_file"].asString();
             if (databaseFile.length() > 0) {
 
-                APImageTransferAgent* ita = startImageTransferOnAThread(config);
+                //APImageTransferAgent* ita = startImageTransferOnAThread(config);
 
                 APWeatherDataManager* wm = new APWeatherDataManager(config);
                 APGreenhouse* gh = new APGreenhouse(config);
@@ -44,8 +44,8 @@ int main(int argc, char* argv[])
                     int timeStrLen = (int)strlen(timeBuf);
                     fprintf(stdout, "+--------------------------------------------------------------------------------------------------+\n");
                     fprintf(stdout, "| %s", timeBuf);
-                    if (timeStrLen < 77) {
-                        for (int i = 0; i < (77 - timeStrLen); i++) {
+                    if (timeStrLen < 97) {
+                        for (int i = 0; i < (97 - timeStrLen); i++) {
                             fprintf(stdout, " ");
                         }
                         fprintf(stdout, "|");
@@ -54,10 +54,10 @@ int main(int argc, char* argv[])
                     fprintf(stdout, "+..................................................................................................+\n");
 
                     // Restart the image transfer agent if it died.
-                    if (ita != NULL &&  !ita->IsRunning()) {
+                    /*if (ita != NULL &&  !ita->IsRunning()) {
                         delete ita;
                         ita = startImageTransferOnAThread(config);
-                    }
+                    }*/
                     // Collect our data.
                     try {
                         time_t start = time(NULL);
