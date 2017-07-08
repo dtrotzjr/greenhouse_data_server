@@ -266,6 +266,7 @@ void APGreenhouse::_parseJSONResponse(char *response) {
             }
         }
     } catch (APSQLException& e) {
+        fprintf(stdout, "Failed with exception: %s", e.what());
         _sqlDb->RollbackTransaction();
         throw e;
     }
