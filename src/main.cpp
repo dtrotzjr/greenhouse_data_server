@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
                     char timeBuf[timeBufLen];
                     strftime(timeBuf, timeBufLen, "%F %T", time_now);
                     int timeStrLen = (int)strlen(timeBuf);
-                    fprintf(stdout, "+------------------------------------------------------------------------------+\n");
+                    fprintf(stdout, "+--------------------------------------------------------------------------------------------------+\n");
                     fprintf(stdout, "| %s", timeBuf);
                     if (timeStrLen < 77) {
                         for (int i = 0; i < (77 - timeStrLen); i++) {
@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
                         fprintf(stdout, "|");
                     }
                     fprintf(stdout, "\n");
-                    fprintf(stdout, "+..............................................................................+\n");
+                    fprintf(stdout, "+..................................................................................................+\n");
 
                     // Restart the image transfer agent if it died.
                     if (ita != NULL &&  !ita->IsRunning()) {
@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
                         fprintf(stderr, "Exception Caught: %s", e.what());
                         sleepLen = 1;
                     }
-                    fprintf(stdout, "+------------------------------------------------------------------------------+\n\n");
+                    fprintf(stdout, "+--------------------------------------------------------------------------------------------------+\n\n");
                     sleep(sleepLen);
                 }
             }

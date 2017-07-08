@@ -68,9 +68,9 @@ void APDarkSkyForecastIO::UpdateWeatherInfo(APSimpleSQL* db, Json::Value& config
         char *response = _getJSONFromForecastIOService(config);
         if (response != NULL && strlen(response) > 0) {
             _parseJSONResponse(response, db, true);
-            fprintf(stdout, "                                 [OK] |\n");
+            fprintf(stdout, "                                                     [OK] |\n");
         } else {
-            fprintf(stdout, "                             [FAILED] |\n");
+            fprintf(stdout, "                                                 [FAILED] |\n");
             fprintf(stderr, "Failed to get a response from Forecast.io\n");
         }
 

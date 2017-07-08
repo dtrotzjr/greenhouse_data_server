@@ -56,9 +56,9 @@ void APOpenWeatherMap::UpdateWeatherInfo(APSimpleSQL* db, Json::Value& config) {
         char* response = _getCurrentConditions(config);
         if (response != NULL && strlen(response) > 0) {
             _parseJSONResponse(response, db, true);
-            fprintf(stdout, "                            [OK] |\n");
+            fprintf(stdout, "                                                [OK] |\n");
         } else {
-            fprintf(stdout, "                        [FAILED] |\n");
+            fprintf(stdout, "                                            [FAILED] |\n");
             fprintf(stderr, "Failed to get a response from open weather map's current conditions api\n");
         }
 
@@ -72,9 +72,9 @@ void APOpenWeatherMap::UpdateWeatherInfo(APSimpleSQL* db, Json::Value& config) {
             response = _getForecast(config);
             if (response != NULL && strlen(response) > 0 ) {
                 _parseJSONResponse(response, db, false);
-                fprintf(stdout, "                                      [OK] |\n");
+                fprintf(stdout, "                                                          [OK] |\n");
             } else {
-                fprintf(stdout, "                                  [FAILED] |\n");
+                fprintf(stdout, "                                                      [FAILED] |\n");
                 fprintf(stderr, "Failed to get a response from open weather map's forecast api\n");
             }
         } else {

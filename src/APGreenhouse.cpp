@@ -96,7 +96,7 @@ void APGreenhouse::GetLatestSensorData() {
         strncpy(messagePostfix, "[NO DATA AVAILABLE] |\n", buffLen);
     }
 
-    int totalSpaces = 81 - (strlen(messagePrefix) + strlen(messagePostfix));
+    int totalSpaces = 101 - (strlen(messagePrefix) + strlen(messagePostfix));
     for (int i = 0; i < totalSpaces; ++i) {
         strcat(spaces, " ");
     }
