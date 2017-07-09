@@ -220,7 +220,7 @@ int APImageTransferAgent::_sftp_image(std::string remote_filename, std::string l
                 return SSH_ERROR;
             }
         }
-        printf("finished\n");
+
         if (len < 0)
             fprintf(stderr, "Error reading file: %s\n", ssh_get_error(session));
         sftp_close(remote_file_in);
