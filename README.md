@@ -18,9 +18,26 @@ $> sudo apt-get install libsqlite3-dev
 $> sudo apt-get install libjsoncpp-dev
 ```
 
+`libssh-dev` is required to transfer images from the greenhouse server.
+`$> sudo apt-get install libssh-dev`
+
+`lib`
+`$> sudo apt-get install libcurl4-openssl-dev`
+
+`cmake` is required to create a `Makefile`
+`$> sudo apt-get install cmake`
+
+
 OPTIONAL: If you want to view the sqlite database from the commandline be install the sqlite3 package
 ```
 $> sudo apt-get install sqlite3
+```
+
+## Building
+From the root directory of the repository perform the following commands
+```
+$> cmake .
+$> make
 ```
 
 ## Running
