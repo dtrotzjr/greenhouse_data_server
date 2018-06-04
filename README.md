@@ -40,6 +40,7 @@ $> cmake .
 $> make
 ```
 
+
 ## Running
 
 ### Create a config.json file
